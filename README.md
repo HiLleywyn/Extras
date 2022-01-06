@@ -12,7 +12,7 @@ OTClientV8 Bot/Tool Macro
 
 **Tool Updates:**
 - Added ability to load a single level room's waypoint configs.
-- Changed Max Lure from 5 to 20.
+- Changed the max lure in target editor from 5 to 20.
 
 
 **Layout:**
