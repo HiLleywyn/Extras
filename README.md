@@ -9,11 +9,16 @@ OTClientV8 Bot/Tool Macro
 ### 2.0.2
 **New Tools:**
 - Auto-Follow Players
+
 **Tool Updates:**
 - Added ability to load a single level room's waypoint configs.
 - Changed Max Lure from 5 to 20.
+
+
 **Layout:**
 - Started work on day/night auto-layouts.
+
+
 **Other:**
 - Reworked auto mana training cooldown timer to stop the poofs.
 - Deleted bot server to attempt to fix random freezing issue.
