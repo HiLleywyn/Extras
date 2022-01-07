@@ -20,18 +20,18 @@ end)
 
 NPCSeller.setOff()
 onAddThing(function(tile, thing)
-if thing:isCreature() and thing:getName() == 'Lootslave' then
-NPCSeller.setOn()
-elseif modules.game_npctrade.npcWindow:isVisible() and not modules.game_npctrade.npcWindow.sellAllButton:isEnabled() then
-NPCSeller.setOff()
-NPC.closeTrade()
-end
+  if thing:isCreature() and thing:getName() == 'Lootslave' then
+    NPCSeller.setOn()
+  elseif modules.game_npctrade.npcWindow:isVisible() and not modules.game_npctrade.npcWindow.sellAllButton:isEnabled() then
+    NPCSeller.setOff()
+    NPC.closeTrade()
+  end
 end)
 
 onRemoveThing(function(tile, thing)
-if NPCSeller.isOn() and thing:isCreature() and thing:getName() == 'Lootslave' then
-NPCSeller.setOff()
-end
+  if NPCSeller.isOn() and thing:isCreature() and thing:getName() == 'Lootslave' then
+    NPCSeller.setOff()
+  end
 end)
 
 UI.Button(

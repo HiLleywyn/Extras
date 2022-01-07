@@ -1,6 +1,6 @@
-addSeparator()
+UI.Separator()
 UI.Label("Container Setup")
-addSeparator()
+UI.Separator()
 contPanelName = "renameContainers"
 if type(storage[contPanelName]) ~= "table" then
     storage[contPanelName] = {
@@ -420,4 +420,4 @@ onContainerOpen(function(container, previousContainer)
 end)
 
 openBackpacks()
-addSeparator()
+UI.Separator()

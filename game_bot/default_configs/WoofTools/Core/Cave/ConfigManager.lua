@@ -1,6 +1,6 @@
 setDefaultTab("Cave")
 
-addSeparator()
+UI.Separator()
 
 cfgBracket = ""
 
@@ -172,7 +172,7 @@ if n.isOn() then
   lvlBrackets["Quests"].func()
 end
 
-addSeparator()
+UI.Separator()
 UI.Label("Automatically load waypoints based on level.")
 UI.Label("Restart macros if changed.")
 local autoLoadWaypoints = macro(500, "Auto-Load Configs", function() end)
@@ -206,4 +206,4 @@ if autoLoadWaypoints.isOn() then
   end
 end
 
-addSeparator()
+UI.Separator()

@@ -1,4 +1,4 @@
-addSeparator()
+UI.Separator()
 
 local distance = 4
 local amountOfMonsters = 2
@@ -18,11 +18,11 @@ macro(1000, "Multi-Target Spells",  function()
         say(storage.Spell1, 250)
     end
 end)
-addTextEdit("Spell1", storage.Spell1 or "Exori Gran Pura", function(widget, text)
+UI.TextEdit(storage.Spell1 or "Exori Gran Pura", function(widget, text)
 storage.Spell1 = text
 end)
-addTextEdit("Spell2", storage.Spell2 or "Exevo Mas Frigo", function(widget, text)
+UI.TextEdit(storage.Spell2 or "Exevo Mas Frigo", function(widget, text)
 storage.Spell2 = text
 end)
 
-addSeparator()
+UI.Separator()

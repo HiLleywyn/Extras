@@ -97,11 +97,11 @@ macro(100, "Auto-Sio Friends", function()
         delay(500) --
     end
 end)
-  addTextEdit("friendName", storage.friendName or "Friend Name", function(widget, text)
+UI.TextEdit(storage.friendName or "Friend Name", function(widget, text)
     storage.friendName = text
 end)
-addLabel("Priority 1 ^ Priority 2 v", "Priority 1 ^ Priority 2 v")
-  addTextEdit("friend1Name", storage.friend1Name or "Friend Name", function(widget, text)
+UI.Label("Priority 1 ^ Priority 2 v")
+UI.TextEdit(storage.friend1Name or "Friend Name", function(widget, text)
     storage.friend1Name = text
 end)
 
@@ -112,7 +112,7 @@ macro(100, "Auto-Cure Paralysis", nil, function()
     saySpell(storage.autoAntiParalyzeText)
 end
 end)
-addTextEdit("autoAntiParalyzeText", storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
+UI.TextEdit(storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
   storage.autoAntiParalyzeText = text
 end)
 
