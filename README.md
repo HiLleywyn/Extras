@@ -1,5 +1,9 @@
 # WoofTools
-OTClientV8 Bot/Tool Macro
+OTClientV8 Bot (Based on VBot) for Evolunia!
+
+## Installation
+Replace the game_bot folder in modules/game_bot with the game_bot folder in this repository.
+If you run into errors, delete the storage.config files in /Application Data/evolunia/bot as well as any other version of WoofTools.
 
 ## Changelog
 ### 2.0.1
@@ -22,3 +26,9 @@ OTClientV8 Bot/Tool Macro
 **Other:**
 - Reworked auto mana training cooldown timer to stop the poofs.
 - Deleted bot server to attempt to fix random freezing issue.
+
+
+---
+## Support:
+Evolunia: Tether
+Discord: Dread Pirate Roberts#4112
