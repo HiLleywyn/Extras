@@ -19,9 +19,9 @@ If you run into errors, delete the storage.config files in /Application Data/evo
 - Changed the max lure in target editor from 5 to 20.
 
 
-**Layout:**
+**Layout/UI:**
 - Started work on day/night auto-layouts.
-
+- Lee's (TrainorCreations) Loot/Green Text channels added to the game_bot module.
 
 **Other:**
 - Reworked auto mana training cooldown timer to stop the poofs.
