@@ -18,9 +18,11 @@ macro(1000, "Multi-Target Spells",  function()
         say(storage.Spell1, 250)
     end
 end)
+UI.Label("Single Target")
 addTextEdit("Spell1", storage.Spell1 or "Exori Gran Pura", function(widget, text)
 storage.Spell1 = text
 end)
+UI.Label("Multi Target")
 addTextEdit("Spell2", storage.Spell2 or "Exevo Mas Frigo", function(widget, text)
 storage.Spell2 = text
 end)

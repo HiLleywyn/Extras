@@ -15,6 +15,9 @@ end
 if CaveBot.Config then
   CaveBot.Config.setup()
 end
+if CaveBot.Waypoints then
+  CaveBot.Waypoints.setup()
+end
 for extension, callbacks in pairs(CaveBot.Extensions) do
   if callbacks.setup then
     callbacks.setup()
@@ -160,6 +163,17 @@ ui.showConfig.onClick = function()
   else
     CaveBot.Config.show()
     ui.showConfig:setOn(true)
+  end
+end
+
+ui.showWaypoints.onClick = function()
+  if not CaveBot.Waypoints then return end
+  if ui.showWaypoints:isOn() then
+    CaveBot.Waypoints.hide()
+    ui.showWaypoints:setOn(false)
+  else
+    CaveBot.Waypoints.show()
+    ui.showWaypoints:setOn(true)
   end
 end
 

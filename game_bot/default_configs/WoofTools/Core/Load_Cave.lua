@@ -1,27 +1,32 @@
 local cavebotTab = "Cave"
 
 setDefaultTab(cavebotTab)
-CaveBot = {} -- global namespace
+CaveBot = {}
 CaveBot.Extensions = {}
 
 --Styles
-importStyle("/Core/Cave/cavebot.otui")
-importStyle("/Core/Cave/config.otui")
-importStyle("/Core/Cave/editor.otui")
-importStyle("/Core/Cave/supply.otui")
+importStyle("/Core/Cave/Main_Cave.otui")
+importStyle("/Core/Cave/Config_Cave.otui")
+importStyle("/Core/Cave/Editor_Cave.otui")
+importStyle("/Core/Cave/WaypointsNew_Cave.otui")
+importStyle("/Core/Cave/Supply_Cave.otui")
 
 -- Core
-dofile("/Core/Cave/ConfigManager.lua")
-dofile("/Core/Cave/actions.lua")
-dofile("/Core/Cave/config.lua")
-dofile("/Core/Cave/editor.lua")
-dofile("/Core/Cave/example_functions.lua")
-dofile("/Core/Cave/recorder.lua")
-dofile("/Core/Cave/walking.lua")
-dofile("/Core/Cave/depositer.lua")
-dofile("/Core/Cave/supply.lua")
+dofile("/Core/Cave/Waypoints_Cave.lua")
+dofile("/Core/Cave/Actions_Cave.lua")
+dofile("/Core/Cave/Config_Cave.lua")
+dofile("/Core/Cave/Editor_Cave.lua")
+dofile("/Core/Cave/Recorder_Cave.lua")
+dofile("/Core/Cave/Walk_Cave.lua")
+dofile("/Core/Cave/WaypointsNew_Cave.lua")
+dofile("/Core/Cave/Supply_Cave.lua")
+
+-- Examples
+dofile("/Core/Cave/Examples/Example_Functions.lua")
+--dofile("/Core/Cave/Examples/Example_Extension.lua")
 
 -- Extensions
+--dofile("/Core/Cave/Examples/Example_Extension.lua")
 
 -- main cavebot file, must be last
-dofile("/Core/Cave/cavebot.lua")
+dofile("/Core/Cave/Main_Cave.lua")

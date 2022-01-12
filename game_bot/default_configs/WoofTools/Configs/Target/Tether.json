@@ -14,7 +14,7 @@
       "useGroupAttackRune": false,
       "groupRuneAttackRadius": 1,
       "groupAttackIgnorePlayers": false,
-      "maxDistance": 3,
+      "maxDistance": 6,
       "groupAttackIgnoreParty": false,
       "lureCount": 3,
       "useGroupAttack": false,

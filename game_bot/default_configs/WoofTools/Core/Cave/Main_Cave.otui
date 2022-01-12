@@ -15,7 +15,7 @@ CaveBotPanel < Panel
   HorizontalSeparator
     margin-top: 2
     margin-bottom: 5
-    
+
   Panel
     id: listPanel
     height: 100
@@ -28,7 +28,7 @@ CaveBotPanel < Panel
       margin-right: 15
       focusable: false
       auto-focus: first
-      
+
     VerticalScrollBar
       id: listScrollbar
       anchors.top: parent.top
@@ -36,23 +36,33 @@ CaveBotPanel < Panel
       anchors.right: parent.right
       pixels-scroll: true
       step: 10
-    
+
   BotSwitch
     id: showEditor
     margin-top: 2
-    
+
     $on:
-      text: Hide waypoints editor
-      
+      text: Hide Waypoint Editor
+
     $!on:
-      text: Show waypoints editor
+      text: Show Waypoint Editor
 
   BotSwitch
     id: showConfig
     margin-top: 2
-    
+
     $on:
-      text: Hide config
-      
+      text: Hide Config
+
     $!on:
-      text: Show config
+      text: Show Config
+
+  BotSwitch
+    id: showWaypoints
+    margin-top: 2
+
+    $on:
+      text: Hide Waypoints
+
+    $!on:
+      text: Show Waypoints

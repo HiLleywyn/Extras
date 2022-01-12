@@ -5,7 +5,7 @@ CaveBot.addAction = function(action, value, focus)
   action = action:lower()
   local raction = CaveBot.Actions[action]
   if not raction then
-    return error("Invalid cavebot action: " .. action)
+    return error("Invalid CaveBot Action: " .. action)
   end
   if type(value) == 'number' then
     value = tostring(value)
@@ -39,13 +39,13 @@ CaveBot.editAction = function(widget, action, value)
   action = action:lower()
   local raction = CaveBot.Actions[action]
   if not raction then
-    return error("Invalid cavebot action: " .. action)
+    return error("Invalid CaveBot Action: " .. action)
   end
-  
+
   if not widget.action or not widget.value then
-    return error("Invalid cavebot action widget, has missing action or value")  
+    return error("Invalid CaveBot Action: (widget :: Invalid value). Has a missing action or value.")
   end
-  
+
   widget:setText(action .. ":" .. value:split("\n")[1])
   widget.action = action
   widget.value = value
@@ -63,7 +63,7 @@ prev is a true when previuos action was executed succesfully, false otherwise
 it must return true if executed correctly, false otherwise
 it can also return string "retry", then the function will be called again in 20 ms
 ]]--
-CaveBot.registerAction = function(action, color, callback) 
+CaveBot.registerAction = function(action, color, callback)
   action = action:lower()
   if CaveBot.Actions[action] then
     return error("Duplicated acction: " .. action)
@@ -79,12 +79,12 @@ CaveBot.registerAction("label", "yellow", function(value, retries, prev)
 end)
 
 CaveBot.registerAction("gotolabel", "#FFFF55", function(value, retries, prev)
-  return CaveBot.gotoLabel(value) 
+  return CaveBot.gotoLabel(value)
 end)
 
 CaveBot.registerAction("delay", "#AAAAAA", function(value, retries, prev)
   if retries == 0 then
-    CaveBot.delay(tonumber(value)) 
+    CaveBot.delay(tonumber(value))
     return "retry"
   end
   return true
@@ -96,23 +96,23 @@ CaveBot.registerAction("function", "red", function(value, retries, prev)
   for extension, callbacks in pairs(CaveBot.Extensions) do
     prefix = prefix .. "local " .. extension .. " = CaveBot.Extensions." .. extension .. "\n"
   end
-  local status, result = pcall(function() 
+  local status, result = pcall(function()
     return assert(load(prefix .. value, "cavebot_function"))()
   end)
   if not status then
     error("Error in cavebot function:\n" .. result)
     return false
-  end  
+  end
   return result
 end)
 
 CaveBot.registerAction("goto", "green", function(value, retries, prev)
   local pos = regexMatch(value, "\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*,\\s*([0-9]+),?\\s*([0-9]?)")
   if not pos[1] then
-    error("Invalid cavebot goto action value. It should be position (x,y,z), is: " .. value)
+    error("Invalid CaveBot Action: (goto :: Invalid Value). It should be position (x,y,z), Is currently: " .. value)
     return false
   end
-  
+
   if CaveBot.Config.get("mapClick") then
     if retries >= 5 then
       return false -- tried 5 times, can't get there
@@ -120,23 +120,23 @@ CaveBot.registerAction("goto", "green", function(value, retries, prev)
   else
     if retries >= 100 then
       return false -- tried 100 times, can't get there
-    end  
+    end
   end
 
   local precision = tonumber(pos[1][5])
-  pos = {x=tonumber(pos[1][2]), y=tonumber(pos[1][3]), z=tonumber(pos[1][4])}  
+  pos = {x=tonumber(pos[1][2]), y=tonumber(pos[1][3]), z=tonumber(pos[1][4])}
   local playerPos = player:getPosition()
-  if pos.z ~= playerPos.z then 
+  if pos.z ~= playerPos.z then
     return false -- different floor
   end
-  
+
   if math.abs(pos.x-playerPos.x) + math.abs(pos.y-playerPos.y) > 40 then
     return false -- too far way
   end
 
   local minimapColor = g_map.getMinimapColor(pos)
   local stairs = (minimapColor >= 210 and minimapColor <= 213)
-  
+
   if stairs then
     if math.abs(pos.x-playerPos.x) == 0 and math.abs(pos.y-playerPos.y) <= 0 then
       return true -- already at position
@@ -149,17 +149,17 @@ CaveBot.registerAction("goto", "green", function(value, retries, prev)
   if not path then
     return false -- there's no way
   end
-    
+
   -- try to find path, don't ignore creatures, don't ignore fields
   if not CaveBot.Config.get("ignoreFields") and CaveBot.walkTo(pos, 40) then
     return "retry"
   end
-  
+
   -- try to find path, don't ignore creatures, ignore fields
   if CaveBot.walkTo(pos, 40, { ignoreNonPathable = true }) then
     return "retry"
   end
-  
+
   if retries >= 3 then
     -- try to lower precision, find something close to final position
     local precison = retries - 1
@@ -168,13 +168,13 @@ CaveBot.registerAction("goto", "green", function(value, retries, prev)
     end
     if CaveBot.walkTo(pos, 50, { ignoreNonPathable = true, precision = precison }) then
       return "retry"
-    end    
+    end
   end
-  
+
   if not CaveBot.Config.get("mapClick") and retries >= 5 then
     return false
   end
-  
+
   if CaveBot.Config.get("skipBlocked") then
     return false
   end
@@ -189,16 +189,16 @@ CaveBot.registerAction("use", "#FFB272", function(value, retries, prev)
   if not pos[1] then
     local itemid = tonumber(value)
     if not itemid then
-      error("Invalid cavebot use action value. It should be (x,y,z) or item id, is: " .. value)
+      error("Invalid CaveBot Action: (use Action :: Invalid Value). It should be (x,y,z) or item id. Is currently: " .. value)
       return false
     end
     use(itemid)
     return true
   end
 
-  pos = {x=tonumber(pos[1][2]), y=tonumber(pos[1][3]), z=tonumber(pos[1][4])}  
+  pos = {x=tonumber(pos[1][2]), y=tonumber(pos[1][3]), z=tonumber(pos[1][4])}
   local playerPos = player:getPosition()
-  if pos.z ~= playerPos.z then 
+  if pos.z ~= playerPos.z then
     return false -- different floor
   end
 
@@ -217,7 +217,7 @@ CaveBot.registerAction("use", "#FFB272", function(value, retries, prev)
   end
 
   use(topThing)
-  CaveBot.delay(CaveBot.Config.get("useDelay") + CaveBot.Config.get("ping"))
+  CaveBot.delay(CaveBot.Config.get("useDelay") + g_game.getPing())
   return true
 end)
 
@@ -225,7 +225,7 @@ CaveBot.registerAction("usewith", "#EEB292", function(value, retries, prev)
   local pos = regexMatch(value, "\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*,\\s*([0-9]+)")
   if not pos[1] then
     if not itemid then
-      error("Invalid cavebot usewith action value. It should be (itemid,x,y,z) or item id, is: " .. value)
+      error("Invalid CaveBot Action: (usewith :: Invalid value). It should be (itemid,x,y,z) or item id. Is currently: " .. value)
       return false
     end
     use(itemid)
@@ -233,9 +233,9 @@ CaveBot.registerAction("usewith", "#EEB292", function(value, retries, prev)
   end
 
   local itemid = tonumber(pos[1][2])
-  pos = {x=tonumber(pos[1][3]), y=tonumber(pos[1][4]), z=tonumber(pos[1][5])}  
+  pos = {x=tonumber(pos[1][3]), y=tonumber(pos[1][4]), z=tonumber(pos[1][5])}
   local playerPos = player:getPosition()
-  if pos.z ~= playerPos.z then 
+  if pos.z ~= playerPos.z then
     return false -- different floor
   end
 
@@ -254,7 +254,7 @@ CaveBot.registerAction("usewith", "#EEB292", function(value, retries, prev)
   end
 
   usewith(itemid, topThing)
-  CaveBot.delay(CaveBot.Config.get("useDelay") + CaveBot.Config.get("ping"))
+  CaveBot.delay(CaveBot.Config.get("useDelay") + g_game.getPing())
   return true
 end)
 
