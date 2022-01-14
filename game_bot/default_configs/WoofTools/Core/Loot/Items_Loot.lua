@@ -466,6 +466,10 @@ loot = {
       {
         name = "Toxic Widows",
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
+      },
+      {
+        name = "Frozen Heroes",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","transmission rune"}
       }
     }
   }
