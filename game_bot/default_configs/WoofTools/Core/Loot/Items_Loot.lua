@@ -441,6 +441,28 @@ loot = {
         loot = {"platinum coin","onyx flail","wand of voodoo","zaoan legs","zaoan armor","zaoan helmet","draken boots","zaoan sword"}
       }
     }
-  }
+  },
   -- 1100+ End
+  -- 1400+ Start
+  {
+    name = "1400+",
+    lists = {
+      {
+        name = "Elite Carniphilas",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
+      },
+      {
+        name = "Necrotic Demons",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
+      },
+      {
+        name = "Cursed Wereboars",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
+      },
+      {
+        name = "Combat Assassins",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","transmission rune"}
+      }
+    }
+  }
 }
