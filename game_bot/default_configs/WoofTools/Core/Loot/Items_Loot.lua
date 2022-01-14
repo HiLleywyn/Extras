@@ -462,6 +462,10 @@ loot = {
       {
         name = "Combat Assassins",
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","transmission rune"}
+      },
+      {
+        name = "Toxic Widows",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
       }
     }
   }
