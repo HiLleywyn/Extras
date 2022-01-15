@@ -2,13 +2,13 @@ local followThis = tostring(storage.followLeader)
 
 FloorChangers = {
     Ladders = {
-        Up = {1948, 1949, 1723, 5542, 16693, 16692, 8065, 8263},
-        Down = {1948, 1949, 1723 ,432, 412, 469, 469}
+        Up = {5542, 16693, 16692, 8065, 8263, 1948, 7771,8265},
+        Down = {432, 412, 469, 469, 369}
     },
 
     Holes = {
-        Up = {},
-        Down = {293, 294, 595, 4728, 385, 9853}
+        Up = {1949, 1723},
+        Down = {293, 294, 595, 4728, 385, 9853, 1949, 1723}
     },
 
     RopeSpots = {
@@ -17,8 +17,8 @@ FloorChangers = {
     },
 
     Stairs = {
-        Up = {16690, 1958, 7548, 7544, 1952, 1950, 1947, 7542, 855, 856, 1978, 1977, 6911, 6915, 1954, 5259, 20492, 1956, 1957, 1955, 5257, 5258, 775, 25058, 22566, 22565, 22747, 30757, 20225},
-        Down = {482, 414, 413, 437, 7731, 469, 413, 434, 469, 859, 438, 6127, 566, 7476, 4826, 484, 433, 369, 20259, 19960, 411}
+        Up = {16690, 1958, 7548, 7544, 1956, 1952, 1950, 1947, 7542, 855, 856, 1978, 1977, 6911, 6915, 1954, 5259, 20492, 1956, 1957, 1955, 5257, 5258, 775, 25058, 22566, 22565, 22747, 30757, 20225},
+        Down = {482, 414, 413, 437, 7731, 469, 413, 434, 469, 859, 438, 6127, 566, 7476, 4826, 484, 433, 369, 20259, 19960, 411, 7768, 17470, 5774, 7053}
     },
 
     Sewers = {
@@ -35,7 +35,7 @@ local function goLastKnown()
         local newTile = g_map.getTile({x = lastKnownPosition.x, y = lastKnownPosition.y, z = lastKnownPosition.z})
         if newTile then
             g_game.use(newTile:getTopUseThing())
-            delay(math.random(300, 700))
+            delay(math.random(100, 200))
         end
     end
 end
@@ -47,7 +47,7 @@ local function handleUse(pos)
         local newTile = g_map.getTile({x = pos.x, y = pos.y, z = pos.z})
         if newTile then
             g_game.use(newTile:getTopUseThing())
-            delay(math.random(400, 800))
+            delay(math.random(100, 200))
         end
     end
 end
@@ -56,8 +56,8 @@ local function handleStep(pos)
     goLastKnown()
     local lastZ = posz()
     if posz() == lastZ then
-        autoWalk(pos)
-        delay(math.random(400, 800))
+        autoWalk(pos, 20, {ignoreNonPathable=true, precision=1, ignoreStairs=false})
+        delay(math.random(100, 200))
     end
 end
 
@@ -67,8 +67,8 @@ local function handleRope(pos)
     if posz() == lastZ then
         local newTile = g_map.getTile({x = pos.x, y = pos.y, z = pos.z})
         if newTile then
-            useWith(3003, newTile:getTopUseThing())
-            delay(math.random(400, 800))
+            useWith(646, newTile:getTopUseThing())
+            delay(math.random(100, 200))
         end
     end
 end
