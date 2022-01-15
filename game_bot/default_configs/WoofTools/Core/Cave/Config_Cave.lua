@@ -9,11 +9,11 @@ CaveBot.Config.setup = function()
   local ui = CaveBot.Config.ui
   local add = CaveBot.Config.add
 
-  add("mapClick", "Use map click", false)
-  add("mapClickDelay", "Map click delay", 100)
-  add("ignoreFields", "Ignore fields", false)
-  add("skipBlocked", "Skip blocked path", false)
-  add("useDelay", "Delay after use", 400)
+  add("mapClick", "Use Map Click", false)
+  add("mapClickDelay", "Map Click Delay", 100)
+  add("ignoreFields", "Ignore Fields", false)
+  add("skipBlocked", "Skip Blocked Paths", false)
+  add("useDelay", "Delay After Use", 400)
 end
 
 CaveBot.Config.show = function()

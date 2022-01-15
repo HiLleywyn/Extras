@@ -15,9 +15,6 @@ end
 if CaveBot.Config then
   CaveBot.Config.setup()
 end
-if CaveBot.Waypoints then
-  CaveBot.Waypoints.setup()
-end
 for extension, callbacks in pairs(CaveBot.Extensions) do
   if callbacks.setup then
     callbacks.setup()
@@ -86,6 +83,7 @@ cavebotMacro = macro(20, function()
 end)
 
 -- config, its callback is called immediately, data can be nil
+
 local lastConfig = ""
 config = Config.setup(storage.cfgFloorNext, configWidget, "cfg", function(name, enabled, data)
   if enabled and CaveBot.Recorder.isOn() then
@@ -166,17 +164,6 @@ ui.showConfig.onClick = function()
   end
 end
 
-ui.showWaypoints.onClick = function()
-  if not CaveBot.Waypoints then return end
-  if ui.showWaypoints:isOn() then
-    CaveBot.Waypoints.hide()
-    ui.showWaypoints:setOn(false)
-  else
-    CaveBot.Waypoints.show()
-    ui.showWaypoints:setOn(true)
-  end
-end
-
 -- public function, you can use them in your scripts
 CaveBot.isOn = function()
   return config.isOn()
@@ -217,12 +204,13 @@ end
 
 CaveBot.save = function()
   local data = {}
+
   for index, child in ipairs(ui.list:getChildren()) do
     table.insert(data, {child.action, child.value})
   end
 
   if CaveBot.Config then
-    table.insert(data, {"config", json.encode(CaveBot.Config.save())})
+      table.insert(data, {"config", json.encode(CaveBot.Config.save())})
   end
 
   local extension_data = {}

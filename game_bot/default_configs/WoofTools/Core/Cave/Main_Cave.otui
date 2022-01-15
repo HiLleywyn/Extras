@@ -56,13 +56,3 @@ CaveBotPanel < Panel
 
     $!on:
       text: Show Config
-
-  BotSwitch
-    id: showWaypoints
-    margin-top: 2
-
-    $on:
-      text: Hide Waypoints
-
-    $!on:
-      text: Show Waypoints

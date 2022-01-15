@@ -66,7 +66,7 @@ it can also return string "retry", then the function will be called again in 20 
 CaveBot.registerAction = function(action, color, callback)
   action = action:lower()
   if CaveBot.Actions[action] then
-    return error("Duplicated acction: " .. action)
+    return error("Duplicate Action: " .. action)
   end
   CaveBot.Actions[action] = {
     color=color,

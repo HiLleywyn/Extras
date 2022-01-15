@@ -50,7 +50,7 @@ CaveBot.Editor.setup = function()
   local ui = CaveBot.Editor.ui
   local registerAction = CaveBot.Editor.registerAction
 
-  registerAction("move up", function()
+  registerAction("Move Up", function()
     local action = CaveBot.actionList:getFocusedChild()
     if not action then return end
     local index = CaveBot.actionList:getChildIndex(action)
@@ -59,12 +59,12 @@ CaveBot.Editor.setup = function()
     CaveBot.actionList:ensureChildVisible(action)
     CaveBot.save()
   end)
-  registerAction("edit", function()
+  registerAction("Edit", function()
     local action = CaveBot.actionList:getFocusedChild()
     if not action or not action.onDoubleClick then return end
     action.onDoubleClick(action)
   end)
-  registerAction("move down", function()
+  registerAction("Move Down", function()
     local action = CaveBot.actionList:getFocusedChild()
     if not action then return end
     local index = CaveBot.actionList:getChildIndex(action)
@@ -73,7 +73,7 @@ CaveBot.Editor.setup = function()
     CaveBot.actionList:ensureChildVisible(action)
     CaveBot.save()
   end)
-  registerAction("remove", function()
+  registerAction("Remove", function()
     local action = CaveBot.actionList:getFocusedChild()
     if not action then return end
     action:destroy()
