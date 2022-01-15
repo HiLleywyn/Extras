@@ -1,17 +1,17 @@
-addSeparator()
+UI.Separator()
 
 macro(500, "Auto-Cast Haste", nil, function()
-  if not hasHaste() and storage.autoHasteText:len() > 0 then
-    if saySpell(storage.autoHasteText) then
-      delay(5000)
+    if not hasHaste() and storage.autoHasteText:len() > 0 then
+      if saySpell(storage.autoHasteText) then
+        delay(5000)
+      end
     end
-  end
-end)
-addTextEdit("autoHasteText", storage.autoHasteText or "utani hur", function(widget, text)
-  storage.autoHasteText = text
+  end)
+UI.TextEdit(storage.autoHasteText or "utani hur", function(widget, text)
+    storage.autoHasteText = text
 end)
 
-addSeparator()
+UI.Separator()
 
 macro((5 * 60000), "Auto-Eat Food", function()
   if not storage.foodItems[1] then return end
@@ -40,7 +40,7 @@ end, true)
 foodContainer:setHeight(35)
 foodContainer:setItems(storage.foodItems)
 
-addSeparator()
+UI.Separator()
 
 local wsadWalking = modules.game_walking.wsadWalking
 local doorsIds = { 8265, 1629, 1632, 5129 }
@@ -72,14 +72,14 @@ if autoOpenDoors.isOn() then
   end)
 end
 
-addSeparator()
+UI.Separator()
 
 macro(3000, "Auto-Train Mana",  function()
   if (hppercent() > 50) then
-    say(storage.ManatrainText)
-  end
+  say(storage.ManatrainText)
+end
 end)
-addTextEdit("ManatrainText", storage.ManatrainText or "Utevo Mana", function(widget, text)
+UI.TextEdit(storage.ManatrainText or "Utevo Mana", function(widget, text)
   storage.ManatrainText = text
 end)
 
@@ -101,7 +101,7 @@ macro(1000, "Auto-Exchange Money", function()
   end
 end)
 
-addSeparator()
+UI.Separator()
 
 macro(60000, "Trade Message", function()
   local trade = getChannelId("advertising")
@@ -116,7 +116,7 @@ UI.TextEdit(storage.autoTradeMessage or "Evolunia is awesome!", function(widget,
   storage.autoTradeMessage = text
 end)
 
-addSeparator()
+UI.Separator()
 
 macro(1000, "Auto-Fish", function()
   for _, tile in ipairs(g_map.getTiles(posz())) do
@@ -126,4 +126,4 @@ macro(1000, "Auto-Fish", function()
   end
 end)
 
-addSeparator()
+UI.Separator()

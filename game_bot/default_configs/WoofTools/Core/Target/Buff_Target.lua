@@ -1,4 +1,4 @@
-addSeparator()
+UI.Separator()
 
 macro(10000, "Auto-Cast Buff", function()
   say(storage.Buff, 10000)

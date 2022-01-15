@@ -1,6 +1,6 @@
 setDefaultTab("Cave")
 
-addSeparator()
+UI.Separator()
 
 cfgFloor = ""
 
@@ -59,4 +59,4 @@ if d.isOn() then
   floorLevel["Dungeons"].func()
 end
 
-addSeparator()
+UI.Separator()
