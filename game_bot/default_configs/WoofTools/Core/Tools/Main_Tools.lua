@@ -1,33 +1,3 @@
-UI.Button("Zoom In map [ctrl + =]", function() zoomIn() end)
-UI.Button("Zoom Out map [ctrl + -]", function() zoomOut() end)
-
-addSeparator()
-
-UI.Button("Macro Editor", function(newText)
-  UI.MultilineEditorWindow(storage.ingame_macros or "", {title="Macro Editor", description="You can add your custom macros (or any other lua code) here"}, function(text)
-    storage.ingame_macros = text
-    reload()
-  end)
-end)
-
-UI.Button("Hotkey Editor", function(newText)
-  UI.MultilineEditorWindow(storage.ingame_hotkeys or "", {title="Hotkey Editor", description="You can add your custom hotkeys/single hotkeys here"}, function(text)
-    storage.ingame_hotkeys = text
-    reload()
-  end)
-end)
-
-for _, scripts in ipairs({storage.ingame_macros, storage.ingame_hotkeys}) do
-  if type(scripts) == "string" and scripts:len() > 3 then
-    local status, result = pcall(function()
-      assert(load(scripts, "ingame_editor"))()
-    end)
-    if not status then
-      error("Ingame edior error:\n" .. result)
-    end
-  end
-end
-
 addSeparator()
 
 macro(500, "Auto-Cast Haste", nil, function()
