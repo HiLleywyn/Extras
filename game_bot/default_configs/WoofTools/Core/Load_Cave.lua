@@ -8,7 +8,6 @@ CaveBot.Extensions = {}
 importStyle("/Core/Cave/Main_Cave.otui")
 importStyle("/Core/Cave/Config_Cave.otui")
 importStyle("/Core/Cave/Editor_Cave.otui")
-importStyle("/Core/Cave/WaypointsNew_Cave.otui")
 importStyle("/Core/Cave/Supply_Cave.otui")
 
 -- Core
@@ -18,7 +17,6 @@ dofile("/Core/Cave/Config_Cave.lua")
 dofile("/Core/Cave/Editor_Cave.lua")
 dofile("/Core/Cave/Recorder_Cave.lua")
 dofile("/Core/Cave/Walk_Cave.lua")
-dofile("/Core/Cave/WaypointsNew_Cave.lua")
 dofile("/Core/Cave/Supply_Cave.lua")
 
 -- Examples
