@@ -2,8 +2,8 @@ local followThis = tostring(storage.followLeader)
 
 FloorChangers = {
     Ladders = {
-        Up = {1948, 5542, 16693, 16692, 8065, 8263},
-        Down = {432, 412, 469, 1949, 469, 1723}
+        Up = {1948, 1949, 1723, 5542, 16693, 16692, 8065, 8263},
+        Down = {1948, 1949, 1723 ,432, 412, 469, 469}
     },
 
     Holes = {

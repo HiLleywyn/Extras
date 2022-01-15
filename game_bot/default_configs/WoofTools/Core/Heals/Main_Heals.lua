@@ -87,22 +87,31 @@ macro(100, "Auto-Sio Friends", function()
     if lvl() >= 500 then
       spell = "exura gran sio"
     end
-    local friend = getPlayerByName(storage.friendName)
-    local friend1 = getPlayerByName(storage.friend1Name)
-    if friend and friend:getHealthPercent() < 99 then
-      say(spell .. " \"" ..storage.friendName)
+    local priorityOne = getPlayerByName(storage.priorityOne)
+    local priorityTwo = getPlayerByName(storage.priorityTwo)
+    local priorityThree = getPlayerByName(storage.priorityThree)
+    if priorityOne and priorityOne:getHealthPercent() < 99 then
+      say(spell .. " \"" ..storage.priorityOne)
         delay(500)
-   elseif friend1 and friend1:getHealthPercent() <= 99 then
-     say(spell .. " \"" ..storage.friend1Name)
-        delay(500) --
+   elseif priorityTwo and priorityTwo:getHealthPercent() <= 99 then
+     say(spell .. " \"" ..storage.priorityTwo)
+        delay(500)
+    elseif priorityThree and priorityThree:getHealthPercent() <= 99 then
+      say(spell .. " \"" ..storage.priorityThree)
+        delay(500)
     end
 end)
-  addTextEdit("friendName", storage.friendName or "Friend Name", function(widget, text)
-    storage.friendName = text
+UI.Label("1st Priority")
+  addTextEdit("priorityOne", storage.priorityOne or "Tezos", function(widget, text)
+    storage.priorityOne = text
 end)
-addLabel("Priority 1 ^ Priority 2 v", "Priority 1 ^ Priority 2 v")
-  addTextEdit("friend1Name", storage.friend1Name or "Friend Name", function(widget, text)
-    storage.friend1Name = text
+UI.Label("2nd Priority")
+  addTextEdit("priorityTwo", storage.priorityTwo or "Satoshi Nakamoto", function(widget, text)
+    storage.priorityTwo = text
+end)
+UI.Label("3rd Priority")
+addTextEdit("priorityThree", storage.priorityThree or "Pirate", function(widget, text)
+  storage.priorityThree = text
 end)
 
 UI.Separator()
