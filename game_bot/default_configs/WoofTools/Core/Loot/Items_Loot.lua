@@ -470,6 +470,10 @@ loot = {
       {
         name = "Frozen Heroes",
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","transmission rune"}
+      },
+      {
+        name = "Venomous Hydras",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
       }
     }
   }
