@@ -1,14 +1,14 @@
 addSeparator()
 
 macro(500, "Auto-Cast Haste", nil, function()
-    if not hasHaste() and storage.autoHasteText:len() > 0 then
-      if saySpell(storage.autoHasteText) then
-        delay(5000)
-      end
+  if not hasHaste() and storage.autoHasteText:len() > 0 then
+    if saySpell(storage.autoHasteText) then
+      delay(5000)
     end
-  end)
-  addTextEdit("autoHasteText", storage.autoHasteText or "utani hur", function(widget, text)
-    storage.autoHasteText = text
+  end
+end)
+addTextEdit("autoHasteText", storage.autoHasteText or "utani hur", function(widget, text)
+  storage.autoHasteText = text
 end)
 
 addSeparator()
@@ -57,30 +57,30 @@ end
 local autoOpenDoors = macro(500, "Auto-Open Doors", function() end)
 
 if autoOpenDoors.isOn() then
-onKeyPress(function(keys)
-  local pos = player:getPosition()
-  if keys == 'Up' or (wsadWalking and keys == 'W') then
-    pos.y = pos.y - 1
-  elseif keys == 'Down' or (wsadWalking and keys == 'S') then
-    pos.y = pos.y + 1
-  elseif keys == 'Left' or (wsadWalking and keys == 'A') then
-    pos.x = pos.x - 1
-  elseif keys == 'Right' or (wsadWalking and keys == 'D') then
-    pos.x = pos.x + 1
-  end
-  checkForDoors(pos)
-end)
+  onKeyPress(function(keys)
+    local pos = player:getPosition()
+    if keys == 'Up' or (wsadWalking and keys == 'W') then
+      pos.y = pos.y - 1
+    elseif keys == 'Down' or (wsadWalking and keys == 'S') then
+      pos.y = pos.y + 1
+    elseif keys == 'Left' or (wsadWalking and keys == 'A') then
+      pos.x = pos.x - 1
+    elseif keys == 'Right' or (wsadWalking and keys == 'D') then
+      pos.x = pos.x + 1
+    end
+    checkForDoors(pos)
+  end)
 end
 
 addSeparator()
 
 macro(3000, "Auto-Train Mana",  function()
   if (hppercent() > 50) then
-  say(storage.ManatrainText)
-end
+    say(storage.ManatrainText)
+  end
 end)
 addTextEdit("ManatrainText", storage.ManatrainText or "Utevo Mana", function(widget, text)
-storage.ManatrainText = text
+  storage.ManatrainText = text
 end)
 
 local moneyIds = {3031, 3035, 3043, 16128, 16129} -- gold coin, platinium coin
@@ -96,7 +96,7 @@ macro(1000, "Auto-Exchange Money", function()
             end
           end
         end
-      end
+    end
     end
   end
 end)

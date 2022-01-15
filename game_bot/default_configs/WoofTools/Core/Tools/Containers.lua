@@ -3,43 +3,43 @@ UI.Label("Container Setup")
 addSeparator()
 contPanelName = "renameContainers"
 if type(storage[contPanelName]) ~= "table" then
-    storage[contPanelName] = {
-        enabled = false;
-        purse = true;
-        all = true;
-        list = {
-            {
-                value = "Main Backpack",
-                enabled = true,
-                item = 9601,
-                min = false,
-            },
-            {
-                value = "Runes",
-                enabled = true,
-                item = 2866,
-                min = true,
-            },
-            {
-                value = "Money",
-                enabled = true,
-                item = 2871,
-                min = true,
-            },
-            {
-                value = "Purse",
-                enabled = true,
-                item = 23396,
-                min = true,
-            },
-            {
-                value = "Lootbag",
-                enabled = false,
-                item = 30264,
-                min = true,
-            },
-        }
+  storage[contPanelName] = {
+    enabled = false;
+    purse = true;
+    all = true;
+    list = {
+      {
+        value = "Main Backpack",
+        enabled = true,
+        item = 9601,
+        min = false,
+      },
+      {
+        value = "Runes",
+        enabled = true,
+        item = 2866,
+        min = true,
+      },
+      {
+        value = "Money",
+        enabled = true,
+        item = 2871,
+        min = true,
+      },
+      {
+        value = "Purse",
+        enabled = true,
+        item = 23396,
+        min = true,
+      },
+      {
+        value = "Lootbag",
+        enabled = false,
+        item = 30264,
+        min = true,
+      },
     }
+  }
 end
 
 local renameContui = setupUI([[
@@ -221,202 +221,202 @@ ContListsWindow < MainWindow
 ]])
 
 function findItemsInArray(t, tfind)
-    local tArray = {}
-    for x,v in pairs(t) do
-        if type(v) == "table" then
-            local aItem = t[x].item
-            local aEnabled = t[x].enabled
-                if aItem then
-                    if tfind and aItem == tfind then
-                        return x
-                    elseif not tfind then
-                        if aEnabled then
-                            table.insert(tArray, aItem)
-                        end
-                    end
-                end
-            end
+  local tArray = {}
+  for x,v in pairs(t) do
+    if type(v) == "table" then
+      local aItem = t[x].item
+      local aEnabled = t[x].enabled
+      if aItem then
+        if tfind and aItem == tfind then
+          return x
+        elseif not tfind then
+          if aEnabled then
+            table.insert(tArray, aItem)
+          end
         end
-    if not tfind then return tArray end
+      end
+    end
+  end
+  if not tfind then return tArray end
 end
 
 local lstBPs
 function openBackpacks()
-    if not storage[contPanelName].all then
-         lstBPs = findItemsInArray(storage[contPanelName].list)
+  if not storage[contPanelName].all then
+    lstBPs = findItemsInArray(storage[contPanelName].list)
+  end
+
+  for _, container in pairs(g_game.getContainers()) do g_game.close(container) end
+  schedule(1000, function()
+    bpItem = getBack()
+    if bpItem ~= nil then
+      g_game.open(bpItem)
+    end
+  end)
+
+  schedule(2000, function()
+    local delay = 1
+
+    local nextContainers = {}
+    containers = getContainers()
+    for i, container in pairs(g_game.getContainers()) do
+      for i, item in ipairs(container:getItems()) do
+        if item:isContainer() then
+          if item:isContainer() and storage[contPanelName].all or (lstBPs and table.contains(lstBPs,item:getId())) then
+            table.insert(nextContainers, item)
+          end
+        end
+      end
+    end
+    if #nextContainers > 0 then
+      for i = 1, #nextContainers do
+        schedule(delay, function()
+          g_game.open(nextContainers[i], nil)
+        end)
+        delay = delay + 250
+      end
     end
 
-    for _, container in pairs(g_game.getContainers()) do g_game.close(container) end
-    schedule(1000, function()
-        bpItem = getBack()
-        if bpItem ~= nil then
-            g_game.open(bpItem)
+    if storage[contPanelName].purse then
+      schedule(delay+200, function()
+        local item = getPurse()
+        if item then
+          use(item)
         end
-    end)
-
-    schedule(2000, function()
-        local delay = 1
-
-        local nextContainers = {}
-        containers = getContainers()
-        for i, container in pairs(g_game.getContainers()) do
-            for i, item in ipairs(container:getItems()) do
-                if item:isContainer() then
-                    if item:isContainer() and storage[contPanelName].all or (lstBPs and table.contains(lstBPs,item:getId())) then
-                        table.insert(nextContainers, item)
-                    end
-                end
-            end
-        end
-        if #nextContainers > 0 then
-            for i = 1, #nextContainers do
-                schedule(delay, function()
-                    g_game.open(nextContainers[i], nil)
-                end)
-                delay = delay + 250
-            end
-        end
-
-        if storage[contPanelName].purse then
-            schedule(delay+200, function()
-                local item = getPurse()
-                if item then
-                    use(item)
-                end
-            end)
-			-- only use this if you play evolunia or similar
-        end
-    end)
+      end)
+      -- only use this if you play evolunia or similar
+    end
+  end)
 
 end
 
 rootWidget = g_ui.getRootWidget()
 if rootWidget then
-    contListWindow = UI.createWindow('ContListsWindow', rootWidget)
+  contListWindow = UI.createWindow('ContListsWindow', rootWidget)
+  contListWindow:hide()
+
+  renameContui.editContList.onClick = function(widget)
+    contListWindow:show()
+    contListWindow:raise()
+    contListWindow:focus()
+  end
+
+  renameContui.reopenCont.onClick = function(widget)
+    openBackpacks()
+  end
+
+  renameContui.title:setOn(storage[contPanelName].enabled)
+  renameContui.title.onClick = function(widget)
+    storage[contPanelName].enabled = not storage[contPanelName].enabled
+    widget:setOn(storage[contPanelName].enabled)
+  end
+
+  contListWindow.closeButton.onClick = function(widget)
     contListWindow:hide()
+  end
 
-    renameContui.editContList.onClick = function(widget)
-        contListWindow:show()
-        contListWindow:raise()
-        contListWindow:focus()
-    end
-
-    renameContui.reopenCont.onClick = function(widget)
-        openBackpacks()
-    end
-
-    renameContui.title:setOn(storage[contPanelName].enabled)
-    renameContui.title.onClick = function(widget)
-        storage[contPanelName].enabled = not storage[contPanelName].enabled
-        widget:setOn(storage[contPanelName].enabled)
-    end
-
-    contListWindow.closeButton.onClick = function(widget)
-        contListWindow:hide()
-    end
-
-    contListWindow.purse.onClick = function(widget)
-        storage[contPanelName].purse = not storage[contPanelName].purse
-        contListWindow.purse:setChecked(storage[contPanelName].purse)
-    end
+  contListWindow.purse.onClick = function(widget)
+    storage[contPanelName].purse = not storage[contPanelName].purse
     contListWindow.purse:setChecked(storage[contPanelName].purse)
+  end
+  contListWindow.purse:setChecked(storage[contPanelName].purse)
 
-    contListWindow.all.onClick = function(widget)
-        storage[contPanelName].all = not storage[contPanelName].all
-        contListWindow.all:setChecked(storage[contPanelName].all)
-        label.enabled:setTooltip(storage[contPanelName].all and 'Opens all containers in main backpack.' or 'Opens listed containers from main backpack.')
-    end
+  contListWindow.all.onClick = function(widget)
+    storage[contPanelName].all = not storage[contPanelName].all
     contListWindow.all:setChecked(storage[contPanelName].all)
+    label.enabled:setTooltip(storage[contPanelName].all and 'Opens all containers in main backpack.' or 'Opens listed containers from main backpack.')
+  end
+  contListWindow.all:setChecked(storage[contPanelName].all)
 
-    local refreshContNames = function(tFocus)
-        local storageVal = storage[contPanelName].list
-        if storageVal and #storageVal > 0 then
-            for i, child in pairs(contListWindow.itemList:getChildren()) do
-                child:destroy()
-            end
-            for _, entry in pairs(storageVal) do
-                local label = g_ui.createWidget("BackpackName", contListWindow.itemList)
-                label.onMouseRelease = function()
-                    contListWindow.contId:setItemId(entry.item)
-                    contListWindow.contName:setText(entry.value)
-                end
-                label.enabled.onClick = function(widget)
-                    entry.enabled = not entry.enabled
-                    label.enabled:setChecked(entry.enabled)
-                    label.enabled:setTooltip(entry.enabled and 'Disable' or 'Enable')
-                    label.enabled:setImageColor(entry.enabled and '#00FF00' or '#FF0000')
-                end
-                label.remove.onClick = function(widget)
-                    table.removevalue(storage[contPanelName].list, entry)
-                    label:destroy()
-                end
-                label.state:setChecked(entry.min)
-                label.state.onClick = function(widget)
-                    entry.min = not entry.min
-                    label.state:setChecked(entry.min)
-                    label.state:setColor(entry.min and '#00FF00' or '#FF0000')
-                    label.state:setTooltip(entry.min and 'Open Minimised' or 'Do not minimise')
-                end
-
-                label:setText(entry.value)
-                label.enabled:setChecked(entry.enabled)
-                label.enabled:setTooltip(entry.enabled and 'Disable' or 'Enable')
-                label.enabled:setImageColor(entry.enabled and '#00FF00' or '#FF0000')
-                label.state:setColor(entry.min and '#00FF00' or '#FF0000')
-                label.state:setTooltip(entry.min and 'Open Minimised' or 'Do not minimise')
-
-                if tFocus and entry.item == tFocus then
-                    tFocus = label
-                end
-            end
-            if tFocus then contListWindow.itemList:focusChild(tFocus) end
+  local refreshContNames = function(tFocus)
+    local storageVal = storage[contPanelName].list
+    if storageVal and #storageVal > 0 then
+      for i, child in pairs(contListWindow.itemList:getChildren()) do
+        child:destroy()
+      end
+      for _, entry in pairs(storageVal) do
+        local label = g_ui.createWidget("BackpackName", contListWindow.itemList)
+        label.onMouseRelease = function()
+          contListWindow.contId:setItemId(entry.item)
+          contListWindow.contName:setText(entry.value)
         end
-    end
-    contListWindow.addItem.onClick = function(widget)
-        local id = contListWindow.contId:getItemId()
-        local trigger = contListWindow.contName:getText()
-
-        if id > 100 and trigger:len() > 0 then
-            local ifind = findItemsInArray(storage[contPanelName].list, id)
-            if ifind then
-                storage[contPanelName].list[ifind] = { item = id, value = trigger, enabled = storage[contPanelName].list[ifind].enabled, min = storage[contPanelName].list[ifind].min}
-            else
-                table.insert(storage[contPanelName].list, { item = id, value = trigger, enabled = true, min = false })
-            end
-            contListWindow.contId:setItemId(0)
-            contListWindow.contName:setText('')
-            contListWindow.contName:setColor('white')
-            contListWindow.contName:setImageColor('#ffffff')
-            contListWindow.contId:setImageColor('#ffffff')
-            refreshContNames(id)
-        else
-            contListWindow.contId:setImageColor('red')
-            contListWindow.contName:setImageColor('red')
-            contListWindow.contName:setColor('red')
+        label.enabled.onClick = function(widget)
+          entry.enabled = not entry.enabled
+          label.enabled:setChecked(entry.enabled)
+          label.enabled:setTooltip(entry.enabled and 'Disable' or 'Enable')
+          label.enabled:setImageColor(entry.enabled and '#00FF00' or '#FF0000')
         end
+        label.remove.onClick = function(widget)
+          table.removevalue(storage[contPanelName].list, entry)
+          label:destroy()
+        end
+        label.state:setChecked(entry.min)
+        label.state.onClick = function(widget)
+          entry.min = not entry.min
+          label.state:setChecked(entry.min)
+          label.state:setColor(entry.min and '#00FF00' or '#FF0000')
+          label.state:setTooltip(entry.min and 'Open Minimised' or 'Do not minimise')
+        end
+
+        label:setText(entry.value)
+        label.enabled:setChecked(entry.enabled)
+        label.enabled:setTooltip(entry.enabled and 'Disable' or 'Enable')
+        label.enabled:setImageColor(entry.enabled and '#00FF00' or '#FF0000')
+        label.state:setColor(entry.min and '#00FF00' or '#FF0000')
+        label.state:setTooltip(entry.min and 'Open Minimised' or 'Do not minimise')
+
+        if tFocus and entry.item == tFocus then
+          tFocus = label
+        end
+      end
+      if tFocus then contListWindow.itemList:focusChild(tFocus) end
     end
-    refreshContNames()
+  end
+  contListWindow.addItem.onClick = function(widget)
+    local id = contListWindow.contId:getItemId()
+    local trigger = contListWindow.contName:getText()
+
+    if id > 100 and trigger:len() > 0 then
+      local ifind = findItemsInArray(storage[contPanelName].list, id)
+      if ifind then
+        storage[contPanelName].list[ifind] = { item = id, value = trigger, enabled = storage[contPanelName].list[ifind].enabled, min = storage[contPanelName].list[ifind].min}
+      else
+        table.insert(storage[contPanelName].list, { item = id, value = trigger, enabled = true, min = false })
+      end
+      contListWindow.contId:setItemId(0)
+      contListWindow.contName:setText('')
+      contListWindow.contName:setColor('white')
+      contListWindow.contName:setImageColor('#ffffff')
+      contListWindow.contId:setImageColor('#ffffff')
+      refreshContNames(id)
+    else
+      contListWindow.contId:setImageColor('red')
+      contListWindow.contName:setImageColor('red')
+      contListWindow.contName:setColor('red')
+    end
+  end
+  refreshContNames()
 end
 
 onContainerOpen(function(container, previousContainer)
-    if renameContui.title:isOn() then
-        if not previousContainer then
-            if not container.window then return end
-            containerWindow = container.window
-            containerWindow:setContentHeight(34)
-            local storageVal = storage[contPanelName].list
-            if storageVal and #storageVal > 0 then
-                for _, entry in pairs(storageVal) do
-                    if entry.enabled and string.find(container:getContainerItem():getId(), entry.item) then
-                        if entry.min then
-                            containerWindow:minimize()
-                        end
-                        containerWindow:setText(entry.value)
-                    end
-                end
+  if renameContui.title:isOn() then
+    if not previousContainer then
+      if not container.window then return end
+      containerWindow = container.window
+      containerWindow:setContentHeight(34)
+      local storageVal = storage[contPanelName].list
+      if storageVal and #storageVal > 0 then
+        for _, entry in pairs(storageVal) do
+          if entry.enabled and string.find(container:getContainerItem():getId(), entry.item) then
+            if entry.min then
+              containerWindow:minimize()
             end
+            containerWindow:setText(entry.value)
+          end
         end
+      end
     end
+  end
 end)
 
 openBackpacks()

@@ -25,7 +25,7 @@ CaveBot.addAction = function(action, value, focus)
           CaveBot.save()
         end)
       end)
-    end
+  end
   end
   if focus then
     widget:focus()
@@ -142,7 +142,7 @@ CaveBot.registerAction("goto", "green", function(value, retries, prev)
       return true -- already at position
     end
   elseif math.abs(pos.x-playerPos.x) == 0 and math.abs(pos.y-playerPos.y) <= (precision or 1) then
-      return true -- already at position
+    return true -- already at position
   end
   -- check if there's a path to that place, ignore creatures and fields
   local path = findPath(playerPos, pos, 40, { ignoreNonPathable = true, precision = 1, ignoreCreatures = true })

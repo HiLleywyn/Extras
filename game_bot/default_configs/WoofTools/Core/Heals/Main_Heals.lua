@@ -82,32 +82,32 @@ end)
 UI.Separator()
 
 macro(100, "Auto-Sio Friends", function()
-    if vocation() ~= 4 then return end
-    local spell = "exura sio"
-    if lvl() >= 500 then
-      spell = "exura gran sio"
-    end
-    local priorityOne = getPlayerByName(storage.priorityOne)
-    local priorityTwo = getPlayerByName(storage.priorityTwo)
-    local priorityThree = getPlayerByName(storage.priorityThree)
-    if priorityOne and priorityOne:getHealthPercent() < 99 then
-      say(spell .. " \"" ..storage.priorityOne)
-        delay(500)
-   elseif priorityTwo and priorityTwo:getHealthPercent() <= 99 then
-     say(spell .. " \"" ..storage.priorityTwo)
-        delay(500)
-    elseif priorityThree and priorityThree:getHealthPercent() <= 99 then
-      say(spell .. " \"" ..storage.priorityThree)
-        delay(500)
-    end
+  if vocation() ~= 4 then return end
+  local spell = "exura sio"
+  if lvl() >= 500 then
+    spell = "exura gran sio"
+  end
+  local priorityOne = getPlayerByName(storage.priorityOne)
+  local priorityTwo = getPlayerByName(storage.priorityTwo)
+  local priorityThree = getPlayerByName(storage.priorityThree)
+  if priorityOne and priorityOne:getHealthPercent() < 99 then
+    say(spell .. " \"" ..storage.priorityOne)
+    delay(500)
+  elseif priorityTwo and priorityTwo:getHealthPercent() <= 99 then
+    say(spell .. " \"" ..storage.priorityTwo)
+    delay(500)
+  elseif priorityThree and priorityThree:getHealthPercent() <= 99 then
+    say(spell .. " \"" ..storage.priorityThree)
+    delay(500)
+  end
 end)
 UI.Label("1st Priority")
-  addTextEdit("priorityOne", storage.priorityOne or "Tezos", function(widget, text)
-    storage.priorityOne = text
+addTextEdit("priorityOne", storage.priorityOne or "Tezos", function(widget, text)
+  storage.priorityOne = text
 end)
 UI.Label("2nd Priority")
-  addTextEdit("priorityTwo", storage.priorityTwo or "Satoshi Nakamoto", function(widget, text)
-    storage.priorityTwo = text
+addTextEdit("priorityTwo", storage.priorityTwo or "Satoshi Nakamoto", function(widget, text)
+  storage.priorityTwo = text
 end)
 UI.Label("3rd Priority")
 addTextEdit("priorityThree", storage.priorityThree or "Pirate", function(widget, text)
@@ -119,7 +119,7 @@ UI.Separator()
 macro(100, "Auto-Cure Paralysis", nil, function()
   if isParalyzed() and storage.autoAntiParalyzeText:len() > 0 then
     saySpell(storage.autoAntiParalyzeText)
-end
+  end
 end)
 addTextEdit("autoAntiParalyzeText", storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
   storage.autoAntiParalyzeText = text

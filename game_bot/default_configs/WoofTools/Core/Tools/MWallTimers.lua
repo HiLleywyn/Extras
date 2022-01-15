@@ -17,7 +17,7 @@ onAddThing(function(tile, thing)
   else
     return
   end
-  
+
   local pos = tile:getPosition().x .. "," .. tile:getPosition().y .. "," .. tile:getPosition().z
   if not activeTimers[pos] or activeTimers[pos] < now then
     activeTimers[pos] = now + timer
