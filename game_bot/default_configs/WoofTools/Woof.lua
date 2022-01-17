@@ -21,19 +21,17 @@ end
 -- here you can set manually order of scripts
 -- libraries should be loaded first
 local luaFiles = {
-  "Load_Cave",
-  "Load_Target",
-  "Load_Heals",
-  "Load_Loot",
-  "Load_Tools"
+  "CONTROL_Cave",
+  "CONTROL_Target",
+  "CONTROL_Heals",
+  "CONTROL_Loot",
+  "CONTROL_Tools",
+  "CONTROL_Switches"
 }
 
 for i, file in ipairs(luaFiles) do
   loadScript(file)
 end
-
--- switches must load seperately!
-dofile("/Core/Switches.lua")
 
 setDefaultTab("Main")
 

@@ -72,6 +72,14 @@ Panel
     height: 17
     margin-top: 2
 
+  Button
+    id: openLootBag
+    !text: tr('Open Loot Bag')
+    anchors.left: parent.left
+    anchors.top: prev.bottom
+    anchors.right: parent.right
+    height: 17
+    margin-top: 2
   ]])
 renameContui:setId(contPanelName)
 
@@ -303,6 +311,10 @@ if rootWidget then
 
   renameContui.reopenCont.onClick = function(widget)
     openBackpacks()
+  end
+
+  renameContui.openLootBag.onClick = function(widget)
+    say("!lootbag")
   end
 
   renameContui.title:setOn(storage[contPanelName].enabled)

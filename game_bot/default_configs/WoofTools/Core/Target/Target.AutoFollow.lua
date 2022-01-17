@@ -140,7 +140,7 @@ local function targetMissing()
   return true
 end
 
-macro(500, "Auto-Follow", "", function(macro)
+local autoFollow = macro(500, "Auto-Follow", "", function(macro)
   local c = getCreatureByName(target)
 
   if g_game.isFollowing() then

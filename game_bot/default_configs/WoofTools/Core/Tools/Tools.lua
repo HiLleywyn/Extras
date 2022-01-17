@@ -1,14 +1,24 @@
 UI.Separator()
 
-macro(500, "Auto-Cast Haste", nil, function()
-    if not hasHaste() and storage.autoHasteText:len() > 0 then
-      if saySpell(storage.autoHasteText) then
-        delay(5000)
-      end
+local bless = false
+macro(1000, "Auto-Bless", function()
+    if bless ~= true then
+        bless = true
+        say("!bless")
     end
-  end)
+end)
+
+UI.Separator()
+
+macro(500, "Auto-Cast Haste", nil, function()
+  if not hasHaste() and storage.autoHasteText:len() > 0 then
+    if saySpell(storage.autoHasteText) then
+      delay(5000)
+    end
+  end
+end)
 UI.TextEdit(storage.autoHasteText or "utani hur", function(widget, text)
-    storage.autoHasteText = text
+  storage.autoHasteText = text
 end)
 
 UI.Separator()
@@ -76,8 +86,8 @@ UI.Separator()
 
 macro(3000, "Auto-Train Mana",  function()
   if (hppercent() > 50) then
-  say(storage.ManatrainText)
-end
+    say(storage.ManatrainText)
+  end
 end)
 UI.TextEdit(storage.ManatrainText or "Utevo Mana", function(widget, text)
   storage.ManatrainText = text
@@ -127,3 +137,43 @@ macro(1000, "Auto-Fish", function()
 end)
 
 UI.Separator()
+
+macro(1000, "Magic Wall Timers", function()
+  local magicWallId = 2129
+  local magicWallTime = 20000
+  local wildGrowthId = 2130
+  local wildGrowthTime = 45000
+
+  local activeTimers = {}
+
+  onAddThing(function(tile, thing)
+    if not thing:isItem() then
+      return
+    end
+    local timer = 0
+    if thing:getId() == magicWallId then
+      timer = magicWallTime
+    elseif thing:getId() == wildGrowthId then
+      timer = wildGrowthTime
+    else
+      return
+    end
+
+    local pos = tile:getPosition().x .. "," .. tile:getPosition().y .. "," .. tile:getPosition().z
+    if not activeTimers[pos] or activeTimers[pos] < now then
+      activeTimers[pos] = now + timer
+    end
+    tile:setTimer(activeTimers[pos] - now)
+  end)
+
+  onRemoveThing(function(tile, thing)
+    if not thing:isItem() then
+      return
+    end
+    if (thing:getId() == magicWallId or thing:getId() == wildGrowthId) and tile:getGround() then
+      local pos = tile:getPosition().x .. "," .. tile:getPosition().y .. "," .. tile:getPosition().z
+      activeTimers[pos] = nil
+      tile:setTimer(0)
+    end
+  end)
+end)

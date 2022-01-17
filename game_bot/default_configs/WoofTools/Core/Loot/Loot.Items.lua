@@ -485,5 +485,5 @@ Loot.Other = {
       },
     }
   }
-  -- Seasonal End
+-- Seasonal End
 }
