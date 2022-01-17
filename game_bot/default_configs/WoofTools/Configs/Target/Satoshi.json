@@ -28,7 +28,7 @@
       "attackRune": 0,
       "groupAttackDelay": 5000,
       "minManaGroup": 1500,
-      "lure": true,
+      "lure": false,
       "keepDistance": false,
       "attackSpellDelay": 2500,
       "chase": false,
