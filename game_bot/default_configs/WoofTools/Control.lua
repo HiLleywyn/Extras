@@ -1,3 +1,8 @@
+local woofTab = "Main"
+
+setDefaultTab(woofTab)
+Woof = {}
+
 -- load all otui files, order doesn't matter
 local configName = modules.game_bot.contentsPanel.config:getCurrentOption().text
 
@@ -26,6 +31,10 @@ local luaFiles = {
 for i, file in ipairs(luaFiles) do
   loadScript(file)
 end
+
+-- switches must load seperately!
+dofile("/Core/Switches.lua")
+
 setDefaultTab("Main")
 
 UI.Separator()

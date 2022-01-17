@@ -1,21 +1,4 @@
-protected_loot = {
-  -- Misc. Start
-  {
-    name = "Misc. Items",
-    lists = {
-      {
-        name = "Christmas Items",
-        loot = {"snowball", "christmas crystal"}
-      },
-      {
-        name = "Reroll Tokens",
-        loot = {"speed reroll token","regeneration reroll token","max health and mana reroll token","damage reroll token"}
-      }
-    }
-  }
-}
-
-loot = {
+Loot.Monsters = {
   -- 0+ Start
   {
     name = "0+",
@@ -478,4 +461,29 @@ loot = {
     }
   }
 -- 1400+ End
+}
+
+Loot.Other = {
+  -- Extra Start
+  {
+    name = "Extras",
+    lists = {
+      {
+        name = "Reroll Tokens",
+        loot = {"speed reroll token","regeneration reroll token","max health and mana reroll token","damage reroll token"}
+      }
+    }
+  },
+  -- Extras End
+  -- Seasonal Start
+  {
+    name = "Seasonal",
+    lists = {
+      {
+        name = "Christmas",
+        loot = {"snowball", "christmas crystal"}
+      },
+    }
+  }
+  -- Seasonal End
 }

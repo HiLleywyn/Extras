@@ -2,7 +2,7 @@ UI.Separator()
 UI.Label("Loot Tools")
 UI.Separator()
 local clearAutoLoot = macro(500, "Auto-Clear Loot", function() end)
-local NPCSeller = macro(1000, "Auto-Sell Loot", function()
+local sellLoot = macro(1000, "Auto-Sell Loot", function()
   if not getContainer(0) then
     use(getBack())
   end
@@ -18,19 +18,19 @@ local NPCSeller = macro(1000, "Auto-Sell Loot", function()
   end
 end)
 
-NPCSeller.setOff()
+sellLoot.setOff()
 onAddThing(function(tile, thing)
   if thing:isCreature() and thing:getName() == 'Lootslave' then
-    NPCSeller.setOn()
+    sellLoot.setOn()
   elseif modules.game_npctrade.npcWindow:isVisible() and not modules.game_npctrade.npcWindow.sellAllButton:isEnabled() then
-    NPCSeller.setOff()
+    sellLoot.setOff()
     NPC.closeTrade()
   end
 end)
 
 onRemoveThing(function(tile, thing)
-  if NPCSeller.isOn() and thing:isCreature() and thing:getName() == 'Lootslave' then
-    NPCSeller.setOff()
+  if sellLoot.isOn() and thing:isCreature() and thing:getName() == 'Lootslave' then
+    sellLoot.setOff()
   end
 end)
 
@@ -50,10 +50,10 @@ UI.Button(
 UI.Separator()
 
 UI.Separator()
-UI.Label("Protected Loot")
+UI.Label("Other Loot")
 UI.Label("(Doesn't erase loot list.)")
 UI.Separator()
-for _, item in ipairs(protected_loot) do
+for _, item in ipairs(Loot.Other) do
   UI.Separator()
   UI.Label(item.name)
   for _, list in ipairs(item.lists) do
@@ -75,7 +75,7 @@ UI.Separator()
 UI.Separator()
 UI.Label("Monster Loot")
 UI.Separator()
-for _, item in ipairs(loot) do
+for _, item in ipairs(Loot.Monsters) do
   UI.Separator()
   UI.Label(item.name)
   for _, list in ipairs(item.lists) do
