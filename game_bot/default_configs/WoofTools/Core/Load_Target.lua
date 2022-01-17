@@ -15,7 +15,6 @@ dofile("/Core/Target/Editor_Target.lua")
 dofile("/Core/Target/Priority_Target.lua")
 dofile("/Core/Target/Walk_Target.lua")
 dofile("/Core/Target/Buff_Target.lua")
-dofile("/Core/Target/Collecting_Target.lua")
 dofile("/Core/Target/Spells_Target.lua")
 
 -- Main must be last.

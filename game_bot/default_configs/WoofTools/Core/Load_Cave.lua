@@ -18,6 +18,7 @@ dofile("/Core/Cave/Editor_Cave.lua")
 dofile("/Core/Cave/Recorder_Cave.lua")
 dofile("/Core/Cave/Walk_Cave.lua")
 dofile("/Core/Cave/Supply_Cave.lua")
+dofile("/Core/Cave/Collecting_Cave.lua")
 
 -- Examples
 dofile("/Core/Cave/Examples/Example_Functions.lua")
