@@ -18,9 +18,9 @@ end
 local luaFiles = {
   "Load_Cave",
   "Load_Target",
-  "Load_Tools",
   "Load_Heals",
-  "Load_Loot"
+  "Load_Loot",
+  "Load_Tools"
 }
 
 for i, file in ipairs(luaFiles) do
@@ -30,21 +30,10 @@ setDefaultTab("Main")
 
 UI.Separator()
 UI.Separator()
-UI.Label("WoofTools v2.0.3")
+UI.Label("WoofTools v2.1.0")
 UI.Separator()
-UI.Separator()
-UI.Label("v2.0.3 Changes:")
-UI.Separator()
-UI.Label("Reworked Waypoint Config.")
-UI.Label("--Now loads by floor.")
-UI.Label("--Added various monster spawns.")
-UI.Label("--Added Desert Dungeon.")
-UI.Label("Reworked Auto-Follow.")
-UI.Label("--Now works for most teleports/staircases/ropes/ladders!")
-UI.Label("Reworked Auto-Sio.")
-UI.Label("--Added third priority target.")
-UI.Label("Cleaned up code.")
-UI.Label("--Deleted useless UI.")
 UI.Separator()
 UI.Label("Support: Tether @ Evolunia")
+UI.Button("Evolunia Discord", function() g_platform.openUrl("https://discord.gg/fPd9hzuqpq") end)
+UI.Button("Community GitHub", function() g_platform.openUrl("https://github.com/EvoluniaCommunity") end)
 UI.Separator()
