@@ -28,15 +28,15 @@ Panel
     storage[conditionPanelName] = {
       enabled = false,
       curePosion = false,
-      poisonCost = 20,
+      poisonCost = 300,
       cureCurse = false,
-      curseCost = 80,
+      curseCost = 300,
       cureBleed = false,
-      bleedCost = 45,
+      bleedCost = 300,
       cureElectrify = false,
-      electrifyCost = 22,
+      electrifyCost = 300,
       cureParalyse = false,
-      paralyseCost = 40,
+      paralyseCost = 300,
       paralyseSpell = "utani hur",
       holdUtamo = false,
       utamoCost = 40,
@@ -184,10 +184,10 @@ Panel
   local utanaCast = nil
   macro(500, function()
     if not storage[conditionPanelName].enabled or modules.game_cooldown.isGroupCooldownIconActive(2) then return end
-    if storage[conditionPanelName].curePoison and mana() >= storage[conditionPanelName].poisonCost and isPoisioned() then say("exana all")
-    elseif storage[conditionPanelName].cureCurse and mana() >= storage[conditionPanelName].curseCost and isCursed() then say("exana all")
-    elseif storage[conditionPanelName].cureBleed and mana() >= storage[conditionPanelName].bleedCost and isBleeding() then say("exana all")
-    elseif storage[conditionPanelName].cureElectrify and mana() >= storage[conditionPanelName].electrifyCost and isEnergized() then say("exana all")
+    if storage[conditionPanelName].curePoison and mana() >= storage[conditionPanelName].poisonCost and isPoisioned() then say("Exana All")
+    elseif storage[conditionPanelName].cureCurse and mana() >= storage[conditionPanelName].curseCost and isCursed() then say("Exana All")
+    elseif storage[conditionPanelName].cureBleed and mana() >= storage[conditionPanelName].bleedCost and isBleeding() then say("Exana All")
+    elseif storage[conditionPanelName].cureElectrify and mana() >= storage[conditionPanelName].electrifyCost and isEnergized() then say("Exana All")
     elseif (not storage[conditionPanelName].ignoreInPz or not isInPz()) and storage[conditionPanelName].holdUtura and mana() >= storage[conditionPanelName].uturaCost and not hasPartyBuff() then say(storage[conditionPanelName].uturaType)
     elseif (not storage[conditionPanelName].ignoreInPz or not isInPz()) and storage[conditionPanelName].holdUtana and mana() >= storage[conditionPanelName].utanaCost and (not utanaCast or (now - utanaCast > 120000)) then say("utana vid") utanaCast = now
     end

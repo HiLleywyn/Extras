@@ -3,9 +3,9 @@ local amountOfMonsters = 1
 
 local tauntMonsters = macro(5000, "Taunt Monsters",  function()
   if vocation() ~= 1 then return end
-  local spell = "exeta res"
+  local spell = "Exeta Res"
   if lvl() >= 400 then
-    spell = "exeta mas res"
+    spell = "Exeta Mas Res"
   end
   local specAmount = 0
   if not g_game.isAttacking() then
