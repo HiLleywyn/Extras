@@ -7,4 +7,3 @@ If you run into errors, delete the storage.config files in /Application Data/evo
 
 ## Support:
 Evolunia: Tether
-Discord: Dread Pirate Roberts#4112
