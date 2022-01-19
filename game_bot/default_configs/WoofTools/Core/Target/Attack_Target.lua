@@ -51,54 +51,6 @@ end
 if not isLooting then -- walk only when not looting
   TargetBot.Creature.walk(creature, config, targets)
 end
-
--- attacks
-local mana = player:getMana()
-if config.useGroupAttack and config.groupAttackSpell:len() > 1 and mana > config.minManaGroup then
-  local creatures = g_map.getSpectatorsInRange(player:getPosition(), false, config.groupAttackRadius, config.groupAttackRadius)
-  local playersAround = false
-  local monsters = 0
-  for _, creature in ipairs(creatures) do
-    if not creature:isLocalPlayer() and creature:isPlayer() and (not config.groupAttackIgnoreParty or creature:getShield() <= 2) then
-      playersAround = true
-    elseif creature:isMonster() then
-      monsters = monsters + 1
-    end
-  end
-  if monsters >= config.groupAttackTargets and (not playersAround or config.groupAttackIgnorePlayers) then
-    if TargetBot.sayAttackSpell(config.groupAttackSpell, config.groupAttackDelay) then
-      return
-    end
-  end
-end
-
-if config.useGroupAttackRune and config.groupAttackRune > 100 then
-  local creatures = g_map.getSpectatorsInRange(creature:getPosition(), false, config.groupRuneAttackRadius, config.groupRuneAttackRadius)
-  local playersAround = false
-  local monsters = 0
-  for _, creature in ipairs(creatures) do
-    if not creature:isLocalPlayer() and creature:isPlayer() and (not config.groupAttackIgnoreParty or creature:getShield() <= 2) then
-      playersAround = true
-    elseif creature:isMonster() then
-      monsters = monsters + 1
-    end
-  end
-  if monsters >= config.groupRuneAttackTargets and (not playersAround or config.groupAttackIgnorePlayers) then
-    if TargetBot.useAttackItem(config.groupAttackRune, 0, creature, config.groupRuneAttackDelay) then
-      return
-    end
-  end
-end
-if config.useSpellAttack and config.attackSpell:len() > 1 and mana > config.minMana then
-  if TargetBot.sayAttackSpell(config.attackSpell, config.attackSpellDelay) then
-    return
-  end
-end
-if config.useRuneAttack and config.attackRune > 100 then
-  if TargetBot.useAttackItem(config.attackRune, 0, creature, config.attackRuneDelay) then
-    return
-  end
-end
 end
 
 TargetBot.Creature.walk = function(creature, config, targets)
