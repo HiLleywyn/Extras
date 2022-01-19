@@ -20,3 +20,5 @@ local tauntMonsters = macro(5000, "Taunt Monsters",  function()
     say(spell)
   end
 end)
+
+UI.Separator()

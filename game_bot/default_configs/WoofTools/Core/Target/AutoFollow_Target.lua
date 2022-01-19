@@ -1,3 +1,5 @@
+UI.Separator()
+
 function getTilesInRange(cPos, radius)
 	local tiles = {}
 
@@ -112,7 +114,7 @@ local doorsIds = { 8265, 7727, 5111, 8261, 8259, 5113, 1646 }
 local followTimeOut = (now + 1500)
 local isFollowing = false
 
-mcrAutoFollow = macro(100, "Auto Follow", function()
+mcrAutoFollow = macro(100, "Auto-Follow", function()
 	local followAction = FollowActions.Walk
 	local useThing = nil
 	local toUseWithItems = nil
@@ -245,7 +247,7 @@ onCreaturePositionChange(function(creature, oldPos, newPos)
 		toFollowPos[newPos.z] = newPos
 	end
 end)
-UI.Label("Follow Player:")
+
 txtToFollow = UI.TextEdit(storage.followLeader or "Please insert character name", function(widget, text)
 	storage.followLeader = text
 end)
