@@ -115,3 +115,14 @@ addTextEdit("priorityThree", storage.priorityThree or "Pirate", function(widget,
 end)
 
 UI.Separator()
+
+macro(100, "Auto-Cure Paralysis", nil, function()
+  if isParalyzed() and storage.autoAntiParalyzeText:len() > 0 then
+    saySpell(storage.autoAntiParalyzeText)
+  end
+end)
+addTextEdit("autoAntiParalyzeText", storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
+  storage.autoAntiParalyzeText = text
+end)
+
+UI.Separator()

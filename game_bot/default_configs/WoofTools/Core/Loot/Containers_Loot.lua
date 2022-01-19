@@ -4,30 +4,18 @@ UI.Separator()
 contPanelName = "renameContainers"
 if type(storage[contPanelName]) ~= "table" then
   storage[contPanelName] = {
-    enabled = false;
+    enabled = true;
     purse = true;
     all = true;
     list = {
       {
-        value = "Main Backpack",
+        value = "Main",
         enabled = true,
         item = 9601,
-        min = false,
-      },
-      {
-        value = "Runes",
-        enabled = true,
-        item = 2866,
         min = true,
       },
       {
-        value = "Money",
-        enabled = true,
-        item = 2871,
-        min = true,
-      },
-      {
-        value = "Purse",
+        value = "Charms",
         enabled = true,
         item = 23396,
         min = true,
@@ -66,15 +54,6 @@ Panel
   Button
     id: reopenCont
     !text: tr('Reopen Containers')
-    anchors.left: parent.left
-    anchors.top: prev.bottom
-    anchors.right: parent.right
-    height: 17
-    margin-top: 2
-
-  Button
-    id: openLootBag
-    !text: tr('Open Loot Bag')
     anchors.left: parent.left
     anchors.top: prev.bottom
     anchors.right: parent.right
@@ -202,7 +181,7 @@ ContListsWindow < MainWindow
     anchors.bottom: parent.bottom
     text: Open All
     tooltip: Opens all containers in main backpack.
-    width: 90
+    width: 95
     height: 15
     margin-top: 2
     margin-left: 3
@@ -211,9 +190,9 @@ ContListsWindow < MainWindow
     id: purse
     anchors.left: prev.right
     anchors.bottom: parent.bottom
-    text: Open Purse
-    tooltip: Opens Store/Charm Purse
-    width: 90
+    text: Open Charms
+    tooltip: Opens the charm container.
+    width: 95
     height: 15
     margin-top: 2
     margin-left: 3
@@ -281,7 +260,7 @@ function openBackpacks()
         schedule(delay, function()
           g_game.open(nextContainers[i], nil)
         end)
-        delay = delay + 250
+        delay = delay + 500
       end
     end
 
@@ -311,10 +290,6 @@ if rootWidget then
 
   renameContui.reopenCont.onClick = function(widget)
     openBackpacks()
-  end
-
-  renameContui.openLootBag.onClick = function(widget)
-    say("!lootbag")
   end
 
   renameContui.title:setOn(storage[contPanelName].enabled)

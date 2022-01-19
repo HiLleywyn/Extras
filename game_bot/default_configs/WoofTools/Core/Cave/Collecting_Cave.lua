@@ -14,7 +14,7 @@ function hasEffect(tile, effect)
 end
 
 function isReachablePosition(pos1, pos2)
-  if (math.abs(pos1.x - pos2.x) <= 7) and (math.abs(pos1.y - pos2.y) <= 6) then
+  if (math.abs(pos1.x - pos2.x) <= 7) and (math.abs(pos1.y - pos2.y) <= 5) then
 
     local steps, result = g_map.findPath(pos1, pos2, 30, 2)
     if result == 0 then
@@ -25,7 +25,7 @@ function isReachablePosition(pos1, pos2)
 end
 
 function isReachableBox(pos1, pos2)
-  if (math.abs(pos1.x - pos2.x) <= 7) and (math.abs(pos1.y - pos2.y) <= 6) then
+  if (math.abs(pos1.x - pos2.x) <= 7) and (math.abs(pos1.y - pos2.y) <= 5) then
     local neighbours = {
       { x = 0, y = -1, z = 0 },
       { x = -1, y = -1, z = 0 },

@@ -9,7 +9,7 @@
       "groupAttackSpell": "",
       "danger": 1,
       "runeAttackDelay": 2000,
-      "lureCavebot": true,
+      "lureCavebot": false,
       "dontLoot": false,
       "useGroupAttackRune": false,
       "groupRuneAttackRadius": 1,

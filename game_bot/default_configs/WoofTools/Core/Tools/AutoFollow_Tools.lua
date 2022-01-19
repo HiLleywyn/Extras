@@ -1,12 +1,12 @@
 function getTilesInRange(cPos, radius)
 	local tiles = {}
-	
+
 	for x=-radius,radius do
 		for y=-radius,radius do
 			table.insert(tiles, g_map.getTile({x = (cPos.x + x), y = (cPos.y + y), z = cPos.z}))
 		end
 	end
-	
+
 	return tiles
 end
 
@@ -56,7 +56,7 @@ function canReach(creature, params)
 	end
 	local myPos = player:getPosition()
 	local otherPos = creature:getPosition()
-	
+
 	if not myPos or not otherPos then
 		return false
 	end
@@ -98,7 +98,7 @@ function getSpecificTopUseThingFromTiles(tiles, condition)
 			end
 		end
 	end
-	
+
 	return nil
 end
 
@@ -116,17 +116,17 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 	local followAction = FollowActions.Walk
 	local useThing = nil
 	local toUseWithItems = nil
-	
+
 	local target = getCreatureByName(storage.followLeader)
 	if target then
 		local tpos = target:getPosition()
 		toFollowPos[tpos.z] = tpos
 	end
-	
+
 	if player:isWalking() then
 		return
 	end
-	
+
 	local p = toFollowPos[posz()]
 	if not p then
 		return
@@ -140,12 +140,12 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 					return true
 				end
 			end
-			
+
 			if thingType:isGround() and not thingType:isGroundBorder() and thingType:isNotMoveable() and thingType:isForceUse() and thingType:isUsable() and thingType:getMinimapColor() == 210 --[[ ropehole ]] then
 				toUseWithItems = {646, 3003} --ropes
 				return true
 			end
-			
+
 			return false
 		end)
 	else
@@ -154,10 +154,10 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 				if table.find(doorsIds, thingType:getId()) then
 					return true
 				end
-				
+
 				return false
 			end)
-			
+
 			if not useThing then
 				-- desperate attempt to get any doors nearby if no door was found until now
 				useThing = getSpecificTopUseThingFromTiles(getTilesInRange(player:getPosition(), 2), function(thingType)
@@ -166,9 +166,9 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 					end
 
 					return false
-				end)	
+				end)
 			end
-		end	
+		end
 	end
 
 	if useThing and toUseWithItems then
@@ -187,7 +187,7 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 					followTimeOut = now + 1500
 				end
 			end
-			
+
 			if autoWalk(p, 20, {ignoreNonPathable=true, precision=1}) then
 				delay(150)
 			end
@@ -199,20 +199,20 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 		end
 	elseif followAction == FollowActions.Use then
 		g_game.use(useThing)
-		
+
 		if isFollowing then
 			g_game.cancelFollow()
 			isFollowing = false
 		end
 		followTimeOut = now + 1500
-		
+
 		delay(250)
 	elseif followAction == FollowActions.UseWith then
 		local item = nil
-		
+
 		for _, toUseWithItem in pairs(toUseWithItems) do
 			item = findItem(toUseWithItem)
-			
+
 			if item then
 				break
 			end
@@ -220,7 +220,7 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 
 		if item then
 			usewith(item, useThing)
-			
+
 			followTimeOut = now + 1500
 			delay(250)
 		else
@@ -228,7 +228,7 @@ mcrAutoFollow = macro(100, "Auto Follow", function()
 											 modules.game_console.SpeakTypesSettings.channelOrange, modules.game_console.defaultTab);
 			delay(2500)
 		end
-		
+
 		if isFollowing then
 			g_game.cancelFollow()
 			isFollowing = false
@@ -240,12 +240,12 @@ onCreaturePositionChange(function(creature, oldPos, newPos)
 	if newPos == nil then
 		return
 	end
-	
+
 	if creature:getName() == storage.followLeader then
 		toFollowPos[newPos.z] = newPos
 	end
 end)
 UI.Label("Follow Player:")
-txtToFollow = UI.TextEdit(storage.followLeader or "Please insert character name", function(widget, text) 
+txtToFollow = UI.TextEdit(storage.followLeader or "Please insert character name", function(widget, text)
 	storage.followLeader = text
 end)
