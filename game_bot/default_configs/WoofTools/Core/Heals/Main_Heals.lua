@@ -1,8 +1,4 @@
-UI.Separator()
-
-Heals.Conditions = {}
-
-UI.Label("Healing Spells")
+UI.Label("Healing / Sustain")
 
 if type(storage.healing1) ~= "table" then
   storage.healing1 = {on=false, title="HP%", text="exura", min=51, max=90}
@@ -33,7 +29,7 @@ end
 
 UI.Separator()
 
-UI.Label("Healing Items")
+UI.Label("Health/Mana Items")
 
 if type(storage.hpitem1) ~= "table" then
   storage.hpitem1 = {on=false, title="HP%", item=266, min=51, max=90}
@@ -72,53 +68,8 @@ for i, healingInfo in ipairs({storage.hpitem1, storage.hpitem2, storage.manaitem
   end)
 end
 
--- UI.Separator()
---
--- UI.Label("Conditions")
--- Heals.Conditions.Table = {
---   ["Energized"] = {
---     playerCondition = function() return isEnergized() end,
---     cureSpell = "Exana All",
---   },
---   ["Cursed"] = {
---     playerCondition = function() return isCursed() end,
---     cureSpell = "Exana All",
---   },
---   ["Bleeding"] = {
---     playerCondition = function() return isBleeding() end,
---     cureSpell = "Exana All",
---   },
---   ["Paralyzed"] = {
---     playerCondition = function() return isParalyzed() end
---   }
--- }
---
--- Heals.Conditions.Cure = macro(500, "Cure Conditions", function()
---   if Heals.Conditions.Table["Energized"].playerCondition() then
---     say(Heals.Conditions.Table["Energized"].cureSpell)
---
---   elseif Heals.Conditions.Table["Cursed"].playerCondition() then
---     say(Heals.Conditions.Table["Cursed"].cureSpell)
---
---   elseif Heals.Conditions.Table["Bleeding"].playerCondition()then
---     say(Heals.Conditions.Table["Bleeding"].cureSpell)
---
---   end
--- end)
---
--- Heals.Conditions.Cure = macro(500, "Cure Paralysis", function()
---   if Heals.Conditions.Table["Paralyzed"].playerCondition() then
---     say(storage.cureParalyzeSpell)
---   end
--- end)
---
--- addTextEdit("cureParalyzeSpell", storage.cureParalyzeSpell or "Utani Hur", function(widget, text)
---   storage.cureParalyzeSpell = text
--- end)
---
--- UI.Separator()
+UI.Separator()
 
-UI.Label("Tools")
 macro(20, "Auto-Mana Shield", function()
   if hasManaShield() then return end
   if TargetBot then
@@ -129,8 +80,8 @@ macro(20, "Auto-Mana Shield", function()
 end)
 
 UI.Separator()
-UI.Label("Sio Friends Setup")
-macro(100, "Auto-Sio", function()
+
+macro(100, "Auto-Sio Friends", function()
   if vocation() ~= 4 then return end
   local spell = "exura sio"
   if lvl() >= 500 then
@@ -161,6 +112,17 @@ end)
 UI.Label("3rd Priority")
 addTextEdit("priorityThree", storage.priorityThree or "Pirate", function(widget, text)
   storage.priorityThree = text
+end)
+
+UI.Separator()
+
+macro(100, "Auto-Cure Paralysis", nil, function()
+  if isParalyzed() and storage.autoAntiParalyzeText:len() > 0 then
+    saySpell(storage.autoAntiParalyzeText)
+  end
+end)
+addTextEdit("autoAntiParalyzeText", storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
+  storage.autoAntiParalyzeText = text
 end)
 
 UI.Separator()

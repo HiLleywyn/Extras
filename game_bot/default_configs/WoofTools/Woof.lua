@@ -21,12 +21,12 @@ end
 -- here you can set manually order of scripts
 -- libraries should be loaded first
 local luaFiles = {
-  "CONTROL_Cave",
-  "CONTROL_Target",
-  "CONTROL_Heals",
-  "CONTROL_Loot",
-  "CONTROL_Tools",
-  "CONTROL_Switches"
+  "Load_Cave",
+  "Load_Target",
+  "Load_Heals",
+  "Load_Loot",
+  "Load_Tools",
+  "Load_Extras"
 }
 
 for i, file in ipairs(luaFiles) do

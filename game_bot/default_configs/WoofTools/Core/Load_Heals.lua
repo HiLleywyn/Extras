@@ -5,8 +5,7 @@ Heals = {}
 Heals.Extensions = {}
 
 -- Import styles
-
--- Import scripts
+--importStyle("/Core/Heals/Main_Heals.otui")
 
 -- Main_Heals.lua must load last
-dofile("/Core/Heals/Heals.lua")
+dofile("/Core/Heals/Main_Heals.lua")
