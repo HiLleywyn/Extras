@@ -1,170 +1,251 @@
-local followThis = tostring(storage.followLeader)
+function getTilesInRange(cPos, radius)
+	local tiles = {}
 
-FloorChangers = {
-  Ladders = {
-    Up = {5542, 16693, 16692, 8065, 8263, 1948, 7771, 8265, 20435},
-    Down = {432, 412, 469, 469, 369}
-  },
+	for x=-radius,radius do
+		for y=-radius,radius do
+			table.insert(tiles, g_map.getTile({x = (cPos.x + x), y = (cPos.y + y), z = cPos.z}))
+		end
+	end
 
-  Holes = {
-    Up = {1949, 1723},
-    Down = {293, 294, 595, 4728, 385, 9853, 1949, 1723}
-  },
+	return tiles
+end
 
-  RopeSpots = {
-    Up = {386,},
-    Down = {}
-  },
+function getTilesBetween(currentPosition, targetPosition)
+	local tiles = {}
+	local directions, result = findPath(currentPosition, targetPosition, getDistanceBetween(currentPosition, targetPosition), {ignoreNonPathable=false, ignoreNonWalkable=true, precision=1})
 
-  Stairs = {
-    Up = {16690, 1958, 7548, 7544, 1956, 1952, 1950, 1947, 7542, 855, 856, 1978, 1977, 6911, 6915, 1954, 5259, 20492, 1956, 1957, 1955, 5257, 5258, 775, 25058, 22566, 22565, 22747, 30757, 20225},
-    Down = {482, 414, 413, 437, 7731, 469, 413, 434, 469, 859, 438, 6127, 566, 7476, 4826, 484, 433, 369, 20259, 19960, 411, 7768, 17470, 5774, 7053}
-  },
+	if not directions then
+		return tiles
+	end
 
-  Sewers = {
-    Up = {},
-    Down = {435}
-  },
+	for _, direction in pairs(directions) do
+		if direction == 0 then
+			currentPosition.y = currentPosition.y - 1
+		elseif direction == 1 then
+			currentPosition.x = currentPosition.x + 1
+		elseif direction == 2 then
+			currentPosition.y = currentPosition.y + 1
+		elseif direction == 3 then
+			currentPosition.x = currentPosition.x - 1
+		elseif direction == 4 then
+			currentPosition.y = currentPosition.y - 1
+			currentPosition.x = currentPosition.x + 1
+		elseif direction == 5 then
+			currentPosition.y = currentPosition.y + 1
+			currentPosition.x = currentPosition.x + 1
+		elseif direction == 6 then
+			currentPosition.y = currentPosition.y + 1
+			currentPosition.x = currentPosition.x - 1
+		elseif direction == 7 then
+			currentPosition.y = currentPosition.y - 1
+			currentPosition.x = currentPosition.x - 1
+		else
+			error("Attempted to evaluate an unknown direction (" .. direction .. ").")
+		end
+
+		table.insert(tiles, g_map.getTile(currentPosition))
+	end
+
+	return tiles
+end
+
+function canReach(creature, params)
+	--function from candybot
+	if not creature then
+		return false
+	end
+	local myPos = player:getPosition()
+	local otherPos = creature:getPosition()
+
+	if not myPos or not otherPos then
+		return false
+	end
+
+	local neighbours = {
+		{x = 0, y = -1, z = 0},
+		{x = -1, y = -1, z = 0},
+		{x = -1, y = 0, z = 0},
+		{x = -1, y = 1, z = 0},
+		{x = 0, y = 1, z = 0},
+		{x = 1, y = 1, z = 0},
+		{x = 1, y = 0, z = 0},
+		{x = 1, y = -1, z = 0}
+	}
+
+	for k,v in pairs(neighbours) do
+		local checkPos = {x = myPos.x + v.x, y = myPos.y + v.y, z = myPos.z + v.z}
+
+		if myPos.x == checkPos.x and myPos.y == checkPos.y and myPos.z == checkPos.z then
+			return true
+		end
+
+		local steps, result = g_map.findPath(otherPos, checkPos, 30, params)
+		if result == 0 then
+			return true
+		end
+	end
+	return false
+end
+
+function getSpecificTopUseThingFromTiles(tiles, condition)
+	for _, tile in ipairs(tiles) do
+		if tile and tile:getTopUseThing() then
+			local thing = tile:getTopUseThing()
+			local thingType = g_things.getThingType(thing:getId())
+
+			if condition(thingType) then
+				return thing
+			end
+		end
+	end
+
+	return nil
+end
+
+local toFollowPos = {}
+local FollowActions = {
+	Walk = 0,
+	Use = 1,
+	UseWith = 2
 }
+local doorsIds = { 8265, 7727, 5111, 8261, 8259, 5113, 1646 }
+local followTimeOut = (now + 1500)
+local isFollowing = false
 
-local target = followThis
-local lastKnownPosition
+mcrAutoFollow = macro(100, "Auto Follow", function()
+	local followAction = FollowActions.Walk
+	local useThing = nil
+	local toUseWithItems = nil
 
-local function goLastKnown()
-  if getDistanceBetween(pos(), {x = lastKnownPosition.x, y = lastKnownPosition.y, z = lastKnownPosition.z}) > 1 then
-    local newTile = g_map.getTile({x = lastKnownPosition.x, y = lastKnownPosition.y, z = lastKnownPosition.z})
-    if newTile then
-      g_game.use(newTile:getTopUseThing())
-      delay(math.random(100, 200))
-    end
-  end
-end
+	local target = getCreatureByName(storage.followLeader)
+	if target then
+		local tpos = target:getPosition()
+		toFollowPos[tpos.z] = tpos
+	end
 
-local function handleUse(pos)
-  goLastKnown()
-  local lastZ = posz()
-  if posz() == lastZ then
-    local newTile = g_map.getTile({x = pos.x, y = pos.y, z = pos.z})
-    if newTile then
-      g_game.use(newTile:getTopUseThing())
-      delay(math.random(100, 200))
-    end
-  end
-end
+	if player:isWalking() then
+		return
+	end
 
-local function handleStep(pos)
-  goLastKnown()
-  local lastZ = posz()
-  if posz() == lastZ then
-    autoWalk(pos, 20, {ignoreNonPathable=true, precision=1, ignoreStairs=false})
-    delay(math.random(100, 200))
-  end
-end
+	local p = toFollowPos[posz()]
+	if not p then
+		return
+	end
 
-local function handleRope(pos)
-  goLastKnown()
-  local lastZ = posz()
-  if posz() == lastZ then
-    local newTile = g_map.getTile({x = pos.x, y = pos.y, z = pos.z})
-    if newTile then
-      useWith(646, newTile:getTopUseThing())
-      delay(math.random(100, 200))
-    end
-  end
-end
+	if not target then
+		useThing = getSpecificTopUseThingFromTiles(getTilesInRange(p, 1), function(thingType)
+			if not thingType:isGround() and not thingType:isGroundBorder() and thingType:isNotMoveable() then
+				if (thingType:isForceUse() and not thingType:isUsable() and thingType:getMinimapColor() == 210) --[[ ladder ]] or
+				   (not thingType:isForceUse() and thingType:isUsable() and thingType:getMinimapColor() == 129) --[[ sewer ]] then
+					return true
+				end
+			end
 
-local floorChangeSelector = {
-  Ladders = {Up = handleUse, Down = handleStep},
-  Holes = {Up = handleStep, Down = handleStep},
-  RopeSpots = {Up = handleRope, Down = handleRope},
-  Stairs = {Up = handleStep, Down = handleStep},
-  Sewers = {Up = handleUse, Down = handleUse},
-}
+			if thingType:isGround() and not thingType:isGroundBorder() and thingType:isNotMoveable() and thingType:isForceUse() and thingType:isUsable() and thingType:getMinimapColor() == 210 --[[ ropehole ]] then
+				toUseWithItems = {646, 3003} --ropes
+				return true
+			end
 
-local function checkTargetPos()
-  local c = getCreatureByName(target)
-  if c and c:getPosition().z == posz() then
-    lastKnownPosition = c:getPosition()
-  end
-end
+			return false
+		end)
+	else
+		if not canReach(target, 16 --[[ ignoreCreatures ]]) then
+			useThing = getSpecificTopUseThingFromTiles(getTilesBetween(player:getPosition(), p), function(thingType)
+				if table.find(doorsIds, thingType:getId()) then
+					return true
+				end
 
-local function distance(pos1, pos2)
-  local pos2 = pos2 or lastKnownPosition or pos()
-  return math.abs(pos1.x - pos2.x) + math.abs(pos1.y - pos2.y)
-end
+				return false
+			end)
 
-local function executeClosest(possibilities)
-  local closest
-  local closestDistance = 99999
-  for _, data in ipairs(possibilities) do
-    local dist = distance(data.pos)
-    if dist < closestDistance then
-      closest = data
-      closestDistance = dist
-    end
-  end
+			if not useThing then
+				-- desperate attempt to get any doors nearby if no door was found until now
+				useThing = getSpecificTopUseThingFromTiles(getTilesInRange(player:getPosition(), 2), function(thingType)
+					if table.find(doorsIds, thingType:getId()) then
+						return true
+					end
 
-  if closest then
-    closest.changer(closest.pos)
-  end
-end
+					return false
+				end)
+			end
+		end
+	end
 
-local function handleFloorChange()
-  local c = getCreatureByName(target)
-  local range = 2
-  local p = pos()
-  local possibleChangers = {}
-  for _, dir in ipairs({"Down", "Up"}) do
-    for changer, data in pairs(FloorChangers) do
-      for x = -range, range do
-        for y = -range, range do
-          local tile = g_map.getTile({x = p.x + x, y = p.y + y, z = p.z})
-          if tile then
-            if table.find(data[dir], tile:getTopUseThing():getId()) then
-              table.insert(possibleChangers, {changer = floorChangeSelector[changer][dir], pos = {x = p.x + x, y = p.y + y, z = p.z}})
-            end
-          end
-        end
-      end
-    end
-  end
-  executeClosest(possibleChangers)
-end
+	if useThing and toUseWithItems then
+		followAction = FollowActions.UseWith
+	elseif useThing then
+		followAction = FollowActions.Use
+	end
 
-local function targetMissing()
-  for _, n in ipairs(getSpectators(false)) do
-    if n:getName() == target then
-      return n:getPosition().z ~= posz()
-    end
-  end
-  return true
-end
+	if followAction == FollowActions.Walk then
+		if g_game.isAttacking() or not target or followTimeOut > now then
+			if isFollowing then
+				g_game.cancelFollow()
+				isFollowing = false
 
-local autoFollow = macro(500, "Auto-Follow", "", function(macro)
-  local c = getCreatureByName(target)
+				if followTimeOut <= now then
+					followTimeOut = now + 1500
+				end
+			end
 
-  if g_game.isFollowing() then
-    if g_game.getFollowingCreature() ~= c then
-      g_game.cancelFollow()
-      g_game.follow(c)
-    end
-  end
+			if autoWalk(p, 20, {ignoreNonPathable=true, precision=1}) then
+				delay(150)
+			end
+		else
+			if not isFollowing or not g_game.isFollowing() then
+				g_game.follow(target)
+				isFollowing = true
+			end
+		end
+	elseif followAction == FollowActions.Use then
+		g_game.use(useThing)
 
-  if c and not g_game.isFollowing() then
-    g_game.follow(c)
-  elseif c and g_game.isFollowing() and getDistanceBetween(pos(), c:getPosition()) > 1 then
-    g_game.cancelFollow()
-    g_game.follow(c)
-  end
+		if isFollowing then
+			g_game.cancelFollow()
+			isFollowing = false
+		end
+		followTimeOut = now + 1500
 
-  checkTargetPos()
-  if targetMissing() and lastKnownPosition then
-    handleFloorChange()
-  end
+		delay(250)
+	elseif followAction == FollowActions.UseWith then
+		local item = nil
+
+		for _, toUseWithItem in pairs(toUseWithItems) do
+			item = findItem(toUseWithItem)
+
+			if item then
+				break
+			end
+		end
+
+		if item then
+			usewith(item, useThing)
+
+			followTimeOut = now + 1500
+			delay(250)
+		else
+			modules.game_console.addTabText("Unable to use item with, since the container with one of the items isn't opened or you do not possess one of the the necessary items.",
+											 modules.game_console.SpeakTypesSettings.channelOrange, modules.game_console.defaultTab);
+			delay(2500)
+		end
+
+		if isFollowing then
+			g_game.cancelFollow()
+			isFollowing = false
+		end
+	end
 end)
 
+onCreaturePositionChange(function(creature, oldPos, newPos)
+	if newPos == nil then
+		return
+	end
+
+	if creature:getName() == storage.followLeader then
+		toFollowPos[newPos.z] = newPos
+	end
+end)
 UI.Label("Follow Player:")
-addTextEdit("playerToFollow", storage.followLeader or "Tether", function(widget, text)
-  storage.followLeader = text
-  target = tostring(text)
+txtToFollow = UI.TextEdit(storage.followLeader or "Please insert character name", function(widget, text)
+	storage.followLeader = text
 end)

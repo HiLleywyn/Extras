@@ -72,51 +72,51 @@ for i, healingInfo in ipairs({storage.hpitem1, storage.hpitem2, storage.manaitem
   end)
 end
 
-UI.Separator()
-
-UI.Label("Conditions")
-Heals.Conditions.Table = {
-  ["Energized"] = {
-    playerCondition = function() return isEnergized() end,
-    cureSpell = "Exana All",
-  },
-  ["Cursed"] = {
-    playerCondition = function() return isCursed() end,
-    cureSpell = "Exana All",
-  },
-  ["Bleeding"] = {
-    playerCondition = function() return isBleeding() end,
-    cureSpell = "Exana All",
-  },
-  ["Paralyzed"] = {
-    playerCondition = function() return isParalyzed() end
-  }
-}
-
-Heals.Conditions.Cure = macro(500, "Cure Conditions", function()
-  if Heals.Conditions.Table["Energized"].playerCondition() then
-    say(Heals.Conditions.Table["Energized"].cureSpell)
-
-  elseif Heals.Conditions.Table["Cursed"].playerCondition() then
-    say(Heals.Conditions.Table["Cursed"].cureSpell)
-
-  elseif Heals.Conditions.Table["Bleeding"].playerCondition()then
-    say(Heals.Conditions.Table["Bleeding"].cureSpell)
-
-  end
-end)
-
-Heals.Conditions.Cure = macro(500, "Cure Paralysis", function()
-  if Heals.Conditions.Table["Paralyzed"].playerCondition() then
-    say(storage.cureParalyzeSpell)
-  end
-end)
-
-addTextEdit("cureParalyzeSpell", storage.cureParalyzeSpell or "Utani Hur", function(widget, text)
-  storage.cureParalyzeSpell = text
-end)
-
-UI.Separator()
+-- UI.Separator()
+--
+-- UI.Label("Conditions")
+-- Heals.Conditions.Table = {
+--   ["Energized"] = {
+--     playerCondition = function() return isEnergized() end,
+--     cureSpell = "Exana All",
+--   },
+--   ["Cursed"] = {
+--     playerCondition = function() return isCursed() end,
+--     cureSpell = "Exana All",
+--   },
+--   ["Bleeding"] = {
+--     playerCondition = function() return isBleeding() end,
+--     cureSpell = "Exana All",
+--   },
+--   ["Paralyzed"] = {
+--     playerCondition = function() return isParalyzed() end
+--   }
+-- }
+--
+-- Heals.Conditions.Cure = macro(500, "Cure Conditions", function()
+--   if Heals.Conditions.Table["Energized"].playerCondition() then
+--     say(Heals.Conditions.Table["Energized"].cureSpell)
+--
+--   elseif Heals.Conditions.Table["Cursed"].playerCondition() then
+--     say(Heals.Conditions.Table["Cursed"].cureSpell)
+--
+--   elseif Heals.Conditions.Table["Bleeding"].playerCondition()then
+--     say(Heals.Conditions.Table["Bleeding"].cureSpell)
+--
+--   end
+-- end)
+--
+-- Heals.Conditions.Cure = macro(500, "Cure Paralysis", function()
+--   if Heals.Conditions.Table["Paralyzed"].playerCondition() then
+--     say(storage.cureParalyzeSpell)
+--   end
+-- end)
+--
+-- addTextEdit("cureParalyzeSpell", storage.cureParalyzeSpell or "Utani Hur", function(widget, text)
+--   storage.cureParalyzeSpell = text
+-- end)
+--
+-- UI.Separator()
 
 UI.Label("Tools")
 macro(20, "Auto-Mana Shield", function()
