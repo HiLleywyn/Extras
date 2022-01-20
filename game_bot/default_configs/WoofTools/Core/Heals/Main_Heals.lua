@@ -1,4 +1,6 @@
-UI.Label("Healing / Sustain")
+UI.Separator()
+UI.Label("Healing Spells")
+UI.Separator()
 
 if type(storage.healing1) ~= "table" then
   storage.healing1 = {on=false, title="HP%", text="exura", min=51, max=90}
@@ -6,7 +8,6 @@ end
 if type(storage.healing2) ~= "table" then
   storage.healing2 = {on=false, title="HP%", text="exura vita", min=0, max=50}
 end
-
 -- create 2 healing widgets
 for _, healingInfo in ipairs({storage.healing1, storage.healing2}) do
   local healingmacro = macro(20, function()
@@ -20,7 +21,6 @@ for _, healingInfo in ipairs({storage.healing1, storage.healing2}) do
     end
   end)
   healingmacro.setOn(healingInfo.on)
-
   UI.DualScrollPanel(healingInfo, function(widget, newParams)
     healingInfo = newParams
     healingmacro.setOn(healingInfo.on)
@@ -28,8 +28,8 @@ for _, healingInfo in ipairs({storage.healing1, storage.healing2}) do
 end
 
 UI.Separator()
-
-UI.Label("Health/Mana Items")
+UI.Label("Healing Items")
+UI.Separator()
 
 if type(storage.hpitem1) ~= "table" then
   storage.hpitem1 = {on=false, title="HP%", item=266, min=51, max=90}
@@ -69,6 +69,8 @@ for i, healingInfo in ipairs({storage.hpitem1, storage.hpitem2, storage.manaitem
 end
 
 UI.Separator()
+UI.Label("Healing Tools")
+UI.Separator()
 
 macro(20, "Auto-Mana Shield", function()
   if hasManaShield() then return end
@@ -77,6 +79,18 @@ macro(20, "Auto-Mana Shield", function()
   else
     say("Utamo Vita")
   end
+end)
+
+UI.Separator()
+
+macro(100, "Auto-Cure Paralysis", nil, function()
+  if isParalyzed() and storage.autoAntiParalyzeText:len() > 0 then
+    saySpell(storage.autoAntiParalyzeText)
+  end
+end)
+
+addTextEdit("autoAntiParalyzeText", storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
+  storage.autoAntiParalyzeText = text
 end)
 
 UI.Separator()
@@ -101,28 +115,15 @@ macro(100, "Auto-Sio Friends", function()
     delay(500)
   end
 end)
-UI.Label("1st Priority")
+UI.Label("1st -> 2nd -> 3rd Priority")
 addTextEdit("priorityOne", storage.priorityOne or "Tezos", function(widget, text)
   storage.priorityOne = text
 end)
-UI.Label("2nd Priority")
 addTextEdit("priorityTwo", storage.priorityTwo or "Satoshi Nakamoto", function(widget, text)
   storage.priorityTwo = text
 end)
-UI.Label("3rd Priority")
 addTextEdit("priorityThree", storage.priorityThree or "Pirate", function(widget, text)
   storage.priorityThree = text
-end)
-
-UI.Separator()
-
-macro(100, "Auto-Cure Paralysis", nil, function()
-  if isParalyzed() and storage.autoAntiParalyzeText:len() > 0 then
-    saySpell(storage.autoAntiParalyzeText)
-  end
-end)
-addTextEdit("autoAntiParalyzeText", storage.autoAntiParalyzeText or "utani gran hur", function(widget, text)
-  storage.autoAntiParalyzeText = text
 end)
 
 UI.Separator()

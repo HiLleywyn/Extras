@@ -26,7 +26,8 @@ local luaFiles = {
   "Load_Heals",
   "Load_Loot",
   "Load_Tools",
-  "Load_Extras"
+  "Load_Extras",
+  "Load_Server"
 }
 
 for i, file in ipairs(luaFiles) do
