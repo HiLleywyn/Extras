@@ -4,14 +4,14 @@
       "danger": 1,
       "keepDistance": false,
       "keepDistanceRange": 1,
-      "lureCount": 5,
+      "lureCount": 1,
       "lureCavebot": false,
       "dontLoot": false,
       "avoidAttacks": false,
       "lure": false,
       "name": "*",
-      "maxDistance": 6,
-      "chase": true,
+      "maxDistance": 10,
+      "chase": false,
       "priority": 1,
       "regex": "^.*$"
     }
