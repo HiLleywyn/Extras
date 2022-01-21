@@ -1,29 +1,89 @@
+--------------------------------------------------------------------------------
+-- Main CaveBot Loader
+--------------------------------------------------------------------------------
 local cavebotTab = "Cave"
-
 setDefaultTab(cavebotTab)
 CaveBot = {}
 CaveBot.Extensions = {}
+--------------------------------------------------------------------------------
+-- Styles and Scripts to Load
+--------------------------------------------------------------------------------
+-- Styles - /Core/Cave/Styles/
+CaveBot.Styles = {
+  "Main",
+  "Config",
+  "Editor"
+}
+--------------------------------------------------------------------------------
+-- Core - /Core/Cave/
+CaveBot.Core = {
+  "Waypoints",
+  --"Dungeons",
+  "Actions",
+  "Config",
+  "Editor",
+  "Recorder",
+  "Walk",
+  "Collecting",
+}
+--------------------------------------------------------------------------------
+-- Functions - /Core/Cave/Functions/
+CaveBot.Functions = {
+  "Example",
+  "Dungeons"
+}
+--------------------------------------------------------------------------------
+-- Extensions - /Core/Cave/Extensions/
+CaveBot.Extensions = {
+  --"Example",
+}
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Local Loading Functions
+--------------------------------------------------------------------------------
+-- Load Styles
+local function loadStyles(s)
+  return importStyle("/Core/Cave/Styles/" .. s .. ".otui")
+end
 
---Styles
-importStyle("/Core/Cave/Main_Cave.otui")
-importStyle("/Core/Cave/Config_Cave.otui")
-importStyle("/Core/Cave/Editor_Cave.otui")
+-- Load Core
+local function loadCore(c)
+  return dofile("/Core/Cave/" .. c .. ".lua")
+end
 
--- Core
-dofile("/Core/Cave/Waypoints_Cave.lua")
-dofile("/Core/Cave/Actions_Cave.lua")
-dofile("/Core/Cave/Config_Cave.lua")
-dofile("/Core/Cave/Editor_Cave.lua")
-dofile("/Core/Cave/Recorder_Cave.lua")
-dofile("/Core/Cave/Walk_Cave.lua")
-dofile("/Core/Cave/Collecting_Cave.lua")
+-- Load Extensions
+local function loadExtensions(e)
+  return dofile("/Core/Cave/Extensions/" .. e .. ".lua")
+end
 
--- Examples
-dofile("/Core/Cave/Examples/Example_Functions.lua")
---dofile("/Core/Cave/Examples/Example_Extension.lua")
+-- Load Functions
+local function loadFunctions(f)
+  return dofile("/Core/Cave/Functions/" .. f .. ".lua")
+end
 
--- Extensions
---dofile("/Core/Cave/Examples/Example_Extension.lua")
+--------------------------------------------------------------------------------
+-- Load Styles, Core, Functions, Extensions and Main
+--------------------------------------------------------------------------------
+-- Load Styles
+for i, s in ipairs(CaveBot.Styles) do
+  loadStyles(s)
+end
 
--- main cavebot file, must be last
-dofile("/Core/Cave/Main_Cave.lua")
+-- Load Core
+for i, c in ipairs(CaveBot.Core) do
+  loadCore(c)
+end
+
+-- Load Extensions
+for i, e in ipairs(CaveBot.Extensions) do
+  loadExtensions(e)
+end
+
+-- Load Functions
+for i, f in ipairs(CaveBot.Functions) do
+  loadFunctions(f)
+end
+
+-- Load Main (ALWAYS LOAD LAST)
+loadCore("Main")
+--------------------------------------------------------------------------------

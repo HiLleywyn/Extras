@@ -1,5 +1,3 @@
-setDefaultTab("Cave")
-
 UI.Separator()
 
 cfgFloor = ""
@@ -21,10 +19,6 @@ floorLevel = {
   [3] = {
     cfg = "/Configs/Cave/Floor_3",
     func = function() setFloor(3) end
-  },
-  ["Dungeons"] = {
-    cfg = "/Configs/Cave/Dungeons",
-    func = function() setFloor("Dungeons") end
   },
   ["Default"] = {
     cfg = "/Configs/Cave",
@@ -52,11 +46,6 @@ end
 local c = macro(500, "Floor 3", function() end)
 if c.isOn() then
   floorLevel[3].func()
-end
-
-local d = macro(500, "Dungeons", function() end)
-if d.isOn() then
-  floorLevel["Dungeons"].func()
 end
 
 UI.Separator()

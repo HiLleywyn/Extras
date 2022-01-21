@@ -106,6 +106,22 @@ CaveBot.registerAction("function", "red", function(value, retries, prev)
   return result
 end)
 
+CaveBot.registerAction("dungeons", "red", function(value, retries, prev)
+  local prefix = "local retries = " .. retries .. "\nlocal prev = " .. tostring(prev) .. "\nlocal delay = CaveBot.delay\nlocal gotoLabel = CaveBot.gotoLabel\n"
+  prefix = prefix .. "local macro = function() error('Macros inside cavebot functions are not allowed') end\n"
+  for extension, callbacks in pairs(CaveBot.Extensions) do
+    prefix = prefix .. "local " .. extension .. " = CaveBot.Extensions." .. extension .. "\n"
+  end
+  local status, result = pcall(function()
+    return assert(load(prefix .. value, "cavebot_function"))()
+  end)
+  if not status then
+    error("Error in cavebot function:\n" .. result)
+    return false
+  end
+  return result
+end)
+
 CaveBot.registerAction("goto", "green", function(value, retries, prev)
   local pos = regexMatch(value, "\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*,\\s*([0-9]+),?\\s*([0-9]?)")
   if not pos[1] then
