@@ -18,7 +18,6 @@ CaveBot.Styles = {
 -- Core - /Core/Cave/
 CaveBot.Core = {
   "Waypoints",
-  --"Dungeons",
   "Actions",
   "Config",
   "Editor",

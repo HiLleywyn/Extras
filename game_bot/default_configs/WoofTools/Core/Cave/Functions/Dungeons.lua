@@ -13,15 +13,7 @@ if not npc then
 end
 
 NPC.say("Hi")
-NPC.say("Dungeon")
-delay(200)
-
-schedule(1000, function()
-  NPC.say("Magical Forest")
-end)
-
-delay(1200)
-
+NPC.say("Magical Forest")
 NPC.say("Bye")
 
 return true
@@ -35,15 +27,7 @@ if not npc then
 end
 
 NPC.say("Hi")
-NPC.say("Dungeon")
-delay(200)
-
-schedule(1000, function()
-  NPC.say("Desert")
-end)
-
-delay(1200)
-
+NPC.say("Desert")
 NPC.say("Bye")
 
 return true
@@ -57,15 +41,7 @@ if not npc then
 end
 
 NPC.say("Hi")
-NPC.say("Dungeon")
-delay(200)
-
-schedule(1000, function()
-  NPC.say("Undead")
-end)
-
-delay(1200)
-
+NPC.say("Undead")
 NPC.say("Bye")
 
 return true

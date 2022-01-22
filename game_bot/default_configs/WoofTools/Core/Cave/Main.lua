@@ -85,60 +85,62 @@ end)
 -- config, its callback is called immediately, data can be nil
 
 local lastConfig = ""
-config = Config.setup(storage.cfgFloorNext, configWidget, "cfg", function(name, enabled, data)
-  if enabled and CaveBot.Recorder.isOn() then
-    CaveBot.Recorder.disable()
-    CaveBot.setOff()
-    return
-  end
+onPlayerPositionChange(function(newPos, oldPos)
+  config = Config.setup(storage.loadedWaypoints, configWidget, "cfg", function(name, enabled, data)
+    if enabled and CaveBot.Recorder.isOn() then
+      CaveBot.Recorder.disable()
+      CaveBot.setOff()
+      return
+    end
 
-  local currentActionIndex = ui.list:getChildIndex(ui.list:getFocusedChild())
-  ui.list:destroyChildren()
-  if not data then return cavebotMacro.setOff() end
+    local currentActionIndex = ui.list:getChildIndex(ui.list:getFocusedChild())
+    ui.list:destroyChildren()
+    if not data then return cavebotMacro.setOff() end
 
-  local cavebotConfig = nil
-  for k,v in ipairs(data) do
-    if type(v) == "table" and #v == 2 then
-      if v[1] == "config" then
-        local status, result = pcall(function()
-          return json.decode(v[2])
-        end)
-        if not status then
-          error("Error while parsing CaveBot extensions from config:\n" .. result)
-        else
-          cavebotConfig = result
-        end
-      elseif v[1] == "extensions" then
-        local status, result = pcall(function()
-          return json.decode(v[2])
-        end)
-        if not status then
-          error("Error while parsing CaveBot extensions from config:\n" .. result)
-        else
-          for extension, callbacks in pairs(CaveBot.Extensions) do
-            if callbacks.onConfigChange then
-              callbacks.onConfigChange(name, enabled, result[extension])
+    local cavebotConfig = nil
+    for k,v in ipairs(data) do
+      if type(v) == "table" and #v == 2 then
+        if v[1] == "config" then
+          local status, result = pcall(function()
+            return json.decode(v[2])
+          end)
+          if not status then
+            error("Error while parsing CaveBot extensions from config:\n" .. result)
+          else
+            cavebotConfig = result
+          end
+        elseif v[1] == "extensions" then
+          local status, result = pcall(function()
+            return json.decode(v[2])
+          end)
+          if not status then
+            error("Error while parsing CaveBot extensions from config:\n" .. result)
+          else
+            for extension, callbacks in pairs(CaveBot.Extensions) do
+              if callbacks.onConfigChange then
+                callbacks.onConfigChange(name, enabled, result[extension])
+              end
             end
           end
+        else
+          CaveBot.addAction(v[1], v[2])
         end
-      else
-        CaveBot.addAction(v[1], v[2])
       end
     end
-  end
 
-  CaveBot.Config.onConfigChange(name, enabled, cavebotConfig)
+    CaveBot.Config.onConfigChange(name, enabled, cavebotConfig)
 
-  actionRetries = 0
-  CaveBot.resetWalking()
-  prevActionResult = true
-  cavebotMacro.setOn(enabled)
-  cavebotMacro.delay = nil
-  if lastConfig == name then
-    -- restore focused child on the action list
-    ui.list:focusChild(ui.list:getChildByIndex(currentActionIndex))
-  end
-  lastConfig = name
+    actionRetries = 0
+    CaveBot.resetWalking()
+    prevActionResult = true
+    cavebotMacro.setOn(enabled)
+    cavebotMacro.delay = nil
+    if lastConfig == name then
+      -- restore focused child on the action list
+      ui.list:focusChild(ui.list:getChildByIndex(currentActionIndex))
+    end
+    lastConfig = name
+  end)
 end)
 
 -- ui callbacks
@@ -210,7 +212,7 @@ CaveBot.save = function()
   end
 
   if CaveBot.Config then
-      table.insert(data, {"config", json.encode(CaveBot.Config.save())})
+    table.insert(data, {"config", json.encode(CaveBot.Config.save())})
   end
 
   local extension_data = {}
