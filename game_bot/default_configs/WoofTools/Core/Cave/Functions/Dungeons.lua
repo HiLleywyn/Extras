@@ -7,42 +7,42 @@ end
 addDungeonFunction("Join Magical Forest Dungeon", [[
 --Join Magical Forest Dungeon
 
-local npc = getCreatureByName("Dungeonslave")
+local npc = getCreatureByName("Dungeonslave", 10000)
 if not npc then
   return false
 end
 
-NPC.say("Hi")
-NPC.say("Magical Forest")
-NPC.say("Bye")
+Libraries.NPCs.scheduleNpcSay("Hi", 10000)
+Libraries.NPCs.scheduleNpcSay("Magical Forest", 10000)
+Libraries.NPCs.scheduleNpcSay("Bye", 10000)
 
 return true
 ]])
 
 addDungeonFunction("Join Desert Dungeon", [[
 --Join Desert Dungeon
-local npc = getCreatureByName("Dungeonslave")
+local npc = getCreatureByName("Dungeonslave", 10000)
 if not npc then
   return false
 end
 
-NPC.say("Hi")
-NPC.say("Desert")
-NPC.say("Bye")
+Libraries.NPCs.scheduleNpcSay("Hi", 10000)
+Libraries.NPCs.scheduleNpcSay("Desert", 10000)
+Libraries.NPCs.scheduleNpcSay("Bye", 10000)
 
 return true
 ]])
 
 addDungeonFunction("Join Undead Dungeon", [[
 --Join Undead Dungeon
-local npc = getCreatureByName("Dungeonslave")
+local npc = getCreatureByName("Dungeonslave", 10000)
 if not npc then
   return false
 end
 
-NPC.say("Hi")
-NPC.say("Undead")
-NPC.say("Bye")
+Libraries.NPCs.scheduleNpcSay("Hi", 10000)
+Libraries.NPCs.scheduleNpcSay("Undead", 10000)
+Libraries.NPCs.scheduleNpcSay("Bye", 1000
 
 return true
 ]])
