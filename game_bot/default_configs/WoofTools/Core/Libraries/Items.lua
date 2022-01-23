@@ -402,6 +402,15 @@
  ​--​------------------------------------------------------------------------------ 
  ​--​ Consumables 
  ​Libraries.​Items​.​Consumables​ ​=​ { 
+ ​  [​"​Example Item​"​] ​=​ { 
+ ​    itemID ​=​ ​0​, 
+ ​    goldPrice ​=​ ​0​, 
+ ​    tokensPrice ​=​ ​0 
+ ​  } 
+ ​} 
+ ​--​------------------------------------------------------------------------------ 
+ ​--​ Currencies 
+ ​Libraries.​Items​.​Currencies​ ​=​ { 
  ​  [​"​Gold Coin"​] ​=​ { 
  ​    itemID ​=​ ​0​, 
  ​    goldValue ​=​ ​1, 
@@ -472,15 +481,6 @@
      dungeonTokensValue = 0,
      eventTokensValue = 1
  ​  }
- ​} 
- ​--​------------------------------------------------------------------------------ 
- ​--​ Currencies 
- ​Libraries.​Items​.​Currencies​ ​=​ { 
- ​  [​"​Example Item​"​] ​=​ { 
- ​    itemID ​=​ ​0​, 
- ​    goldPrice ​=​ ​0​, 
- ​    tokensPrice ​=​ ​0​  
- ​  } 
  ​} 
  ​--​------------------------------------------------------------------------------ 
  ​--​ Others 
