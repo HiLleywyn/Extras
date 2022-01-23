@@ -22,13 +22,7 @@ end
 -- libraries should be loaded first
 local luaFiles = {
   "Load_Libraries",
-  "Load_Cave",
-  "Load_Target",
-  "Load_Heals",
-  "Load_Loot",
-  "Load_Tools",
-  "Load_Extras",
-  "Load_Server"
+  "Load_Bot"
 }
 
 for i, file in ipairs(luaFiles) do

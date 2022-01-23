@@ -1,40 +1,26 @@
 --------------------------------------------------------------------------------
--- Main CaveBot Loader
+-- Main Extras Loader
 --------------------------------------------------------------------------------
-local cavebotTab = "Cave"
-setDefaultTab(cavebotTab)
-CaveBot = {}
-CaveBot.Extensions = {}
+Extras = {}
+Extras.Extensions = {}
 --------------------------------------------------------------------------------
 -- Styles and Scripts to Load
 --------------------------------------------------------------------------------
--- Styles - /Core/Cave/Styles/
-CaveBot.Styles = {
-  "Main",
-  "Config",
-  "Editor"
+-- Styles - /Core/Bot/Extras/Styles/
+Extras.Styles = {
 }
 --------------------------------------------------------------------------------
--- Core - /Core/Cave/
-CaveBot.Core = {
-  "Waypoints",
-  "Actions",
-  "Config",
-  "Editor",
-  "Recorder",
-  "Walk",
-  "Collecting",
+-- Core - /Core/Bot/Extras/
+Extras.Core = {
+  "MagicWallTimers",
 }
 --------------------------------------------------------------------------------
--- Functions - /Core/Cave/Functions/
-CaveBot.Functions = {
-  "Example",
-  "Dungeons"
+-- Functions - /Core/Bot/Extras/Functions/
+Extras.Functions = {
 }
 --------------------------------------------------------------------------------
--- Extensions - /Core/Cave/Extensions/
-CaveBot.Extensions = {
-  --"Example",
+-- Extensions - /Core/Bot/Extras/Extensions/
+Extras.Extensions = {
 }
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -42,47 +28,44 @@ CaveBot.Extensions = {
 --------------------------------------------------------------------------------
 -- Load Styles
 local function loadStyles(s)
-  return importStyle("/Core/Cave/Styles/" .. s .. ".otui")
+  return importStyle("/Core/Bot/Extras/Styles/" .. s .. ".otui")
 end
 
 -- Load Core
 local function loadCore(c)
-  return dofile("/Core/Cave/" .. c .. ".lua")
+  return dofile("/Core/Bot/Extras/" .. c .. ".lua")
 end
 
 -- Load Extensions
 local function loadExtensions(e)
-  return dofile("/Core/Cave/Extensions/" .. e .. ".lua")
+  return dofile("/Core/Bot/Extras/Extensions/" .. e .. ".lua")
 end
 
 -- Load Functions
 local function loadFunctions(f)
-  return dofile("/Core/Cave/Functions/" .. f .. ".lua")
+  return dofile("/Core/Bot/Extras/Functions/" .. f .. ".lua")
 end
 
 --------------------------------------------------------------------------------
 -- Load Styles, Core, Functions, Extensions and Main
 --------------------------------------------------------------------------------
 -- Load Styles
-for i, s in ipairs(CaveBot.Styles) do
+for i, s in ipairs(Extras.Styles) do
   loadStyles(s)
 end
 
 -- Load Core
-for i, c in ipairs(CaveBot.Core) do
+for i, c in ipairs(Extras.Core) do
   loadCore(c)
 end
 
 -- Load Extensions
-for i, e in ipairs(CaveBot.Extensions) do
+for i, e in ipairs(Extras.Extensions) do
   loadExtensions(e)
 end
 
 -- Load Functions
-for i, f in ipairs(CaveBot.Functions) do
+for i, f in ipairs(Extras.Functions) do
   loadFunctions(f)
 end
-
--- Load Main (ALWAYS LOAD LAST)
-loadCore("Main")
 --------------------------------------------------------------------------------
