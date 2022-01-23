@@ -83,64 +83,156 @@ cavebotMacro = macro(20, function()
 end)
 
 -- config, its callback is called immediately, data can be nil
-
 local lastConfig = ""
 onPlayerPositionChange(function(newPos, oldPos)
-  config = Config.setup(storage.loadedWaypoints, configWidget, "cfg", function(name, enabled, data)
-    if enabled and CaveBot.Recorder.isOn() then
-      CaveBot.Recorder.disable()
-      CaveBot.setOff()
-      return
-    end
+  if (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon One"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Two"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Three"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Four"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Five"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Six"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Seven"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Eight"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Nine"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Ten"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Eleven"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Magical Forest Dungeon Twelve"]) and toggleMagicalForest.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon One"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Two"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Three"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Four"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Five"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Six"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Seven"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Eight"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Nine"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Ten"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Eleven"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Desert Dungeon Twelve"]) and toggleDesert.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon One"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Two"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Three"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Four"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Five"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Six"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Seven"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Eight"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Nine"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Ten"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Eleven"]) and toggleUndead.isOn())
+  or (Libraries.Tables.toString(newPos) == Libraries.Tables.toString(Libraries.Tiles.Landmarks["Undead Dungeon Twelve"]) and toggleUndead.isOn()) then
+    config = Config.setup(storage.loadedWaypoints, configWidget, "cfg", function(name, enabled, data)
+      if enabled and CaveBot.Recorder.isOn() then
+        CaveBot.Recorder.disable()
+        CaveBot.setOff()
+        return
+      end
 
-    local currentActionIndex = ui.list:getChildIndex(ui.list:getFocusedChild())
-    ui.list:destroyChildren()
-    if not data then return cavebotMacro.setOff() end
+      local currentActionIndex = ui.list:getChildIndex(ui.list:getFocusedChild())
+      ui.list:destroyChildren()
+      if not data then return cavebotMacro.setOff() end
 
-    local cavebotConfig = nil
-    for k,v in ipairs(data) do
-      if type(v) == "table" and #v == 2 then
-        if v[1] == "config" then
-          local status, result = pcall(function()
-            return json.decode(v[2])
-          end)
-          if not status then
-            error("Error while parsing CaveBot extensions from config:\n" .. result)
-          else
-            cavebotConfig = result
-          end
-        elseif v[1] == "extensions" then
-          local status, result = pcall(function()
-            return json.decode(v[2])
-          end)
-          if not status then
-            error("Error while parsing CaveBot extensions from config:\n" .. result)
-          else
-            for extension, callbacks in pairs(CaveBot.Extensions) do
-              if callbacks.onConfigChange then
-                callbacks.onConfigChange(name, enabled, result[extension])
+      local cavebotConfig = nil
+      for k,v in ipairs(data) do
+        if type(v) == "table" and #v == 2 then
+          if v[1] == "config" then
+            local status, result = pcall(function()
+              return json.decode(v[2])
+            end)
+            if not status then
+              error("Error while parsing CaveBot extensions from config:\n" .. result)
+            else
+              cavebotConfig = result
+            end
+          elseif v[1] == "extensions" then
+            local status, result = pcall(function()
+              return json.decode(v[2])
+            end)
+            if not status then
+              error("Error while parsing CaveBot extensions from config:\n" .. result)
+            else
+              for extension, callbacks in pairs(CaveBot.Extensions) do
+                if callbacks.onConfigChange then
+                  callbacks.onConfigChange(name, enabled, result[extension])
+                end
               end
             end
+          else
+            CaveBot.addAction(v[1], v[2])
           end
-        else
-          CaveBot.addAction(v[1], v[2])
         end
       end
-    end
 
-    CaveBot.Config.onConfigChange(name, enabled, cavebotConfig)
+      CaveBot.Config.onConfigChange(name, enabled, cavebotConfig)
 
-    actionRetries = 0
-    CaveBot.resetWalking()
-    prevActionResult = true
-    cavebotMacro.setOn(enabled)
-    cavebotMacro.delay = nil
-    if lastConfig == name then
-      -- restore focused child on the action list
-      ui.list:focusChild(ui.list:getChildByIndex(currentActionIndex))
+      actionRetries = 0
+      CaveBot.resetWalking()
+      prevActionResult = true
+      cavebotMacro.setOn(enabled)
+      cavebotMacro.delay = nil
+      if lastConfig == name then
+        -- restore focused child on the action list
+        ui.list:focusChild(ui.list:getChildByIndex(currentActionIndex))
+      end
+      lastConfig = name
+    end)
+  end
+end)
+
+config = Config.setup(storage.loadedWaypoints, configWidget, "cfg", function(name, enabled, data)
+  if enabled and CaveBot.Recorder.isOn() then
+    CaveBot.Recorder.disable()
+    CaveBot.setOff()
+    return
+  end
+
+  local currentActionIndex = ui.list:getChildIndex(ui.list:getFocusedChild())
+  ui.list:destroyChildren()
+  if not data then return cavebotMacro.setOff() end
+
+  local cavebotConfig = nil
+  for k,v in ipairs(data) do
+    if type(v) == "table" and #v == 2 then
+      if v[1] == "config" then
+        local status, result = pcall(function()
+          return json.decode(v[2])
+        end)
+        if not status then
+          error("Error while parsing CaveBot extensions from config:\n" .. result)
+        else
+          cavebotConfig = result
+        end
+      elseif v[1] == "extensions" then
+        local status, result = pcall(function()
+          return json.decode(v[2])
+        end)
+        if not status then
+          error("Error while parsing CaveBot extensions from config:\n" .. result)
+        else
+          for extension, callbacks in pairs(CaveBot.Extensions) do
+            if callbacks.onConfigChange then
+              callbacks.onConfigChange(name, enabled, result[extension])
+            end
+          end
+        end
+      else
+        CaveBot.addAction(v[1], v[2])
+      end
     end
-    lastConfig = name
-  end)
+  end
+
+  CaveBot.Config.onConfigChange(name, enabled, cavebotConfig)
+
+  actionRetries = 0
+  CaveBot.resetWalking()
+  prevActionResult = true
+  cavebotMacro.setOn(enabled)
+  cavebotMacro.delay = nil
+  if lastConfig == name then
+    -- restore focused child on the action list
+    ui.list:focusChild(ui.list:getChildByIndex(currentActionIndex))
+  end
+  lastConfig = name
 end)
 
 -- ui callbacks

@@ -15,7 +15,57 @@ TargetBot.Creature.calculatePriority = function(creature, config, path)
   -- add config priority
   priority = priority + config.priority
 
-  -- extra priority for close distance
+  -- Calculate priority based on monster level.
+  local creatureName = creature:getName()
+  if Libraries.Strings.getFirstNumber(creatureName) ~= nil then
+    if Libraries.Strings.getFirstNumber(creatureName) >= 5000 then
+      priority = priority + 5
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 4750 then
+      priority = priority + 4.7
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 4500 then
+      priority = priority + 4.5
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 4250 then
+      priority = priority + 4.2
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 4000 then
+      priority = priority + 4.0
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 3750 then
+      priority = priority + 3.7
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 3500 then
+      priority = priority + 3.5
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 3250 then
+      priority = priority + 3.2
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 3000 then
+      priority = priority + 3.0
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 2750 then
+      priority = priority + 2.7
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 2500 then
+      priority = priority + 2.5
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 2250 then
+      priority = priority + 2.2
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 2000 then
+      priority = priority + 2.0
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 1750 then
+      priority = priority + 1.7
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 1500 then
+      priority = priority + 1.5
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 1250 then
+      priority = priority + 1.2
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 1000 then
+      priority = priority + 1.0
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 750 then
+      priority = priority + 0.7
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 500 then
+      priority = priority + 0.5
+    elseif Libraries.Strings.getFirstNumber(creatureName) <= 250 then
+      priority = priority + 0.2
+    else
+      priority = priority
+    end
+  else
+    priority = priority
+  end
+
+  -- Calculate priority based on monster distance.
   local path_length = #path
   if path_length == 1 then
     priority = priority + 5
@@ -41,7 +91,7 @@ TargetBot.Creature.calculatePriority = function(creature, config, path)
     priority = priority
   end
 
-  -- extra priority for low health
+  -- Calculate priority based on monster health.
   if creature:getHealthPercent() < 5 then
     priority = priority + 2.5
   elseif creature:getHealthPercent() < 10 then

@@ -21,6 +21,7 @@ end
 -- here you can set manually order of scripts
 -- libraries should be loaded first
 local luaFiles = {
+  "Load_Libraries",
   "Load_Cave",
   "Load_Target",
   "Load_Heals",

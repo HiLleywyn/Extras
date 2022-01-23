@@ -71,23 +71,23 @@ UI.Label("Load an individual waypoint folder.")
 UI.Label("Can only load one at a time!")
 UI.Label("Restart macros if changed.")
 
-local a = macro(500, "Floor 1", function() end)
-if a.isOn() then
+toggleFloorOne = macro(500, "Floor 1", function() end)
+if toggleFloorOne.isOn() then
   waypointsTable[1].func()
 end
 
-local b = macro(500, "Floor 2", function() end)
-if b.isOn() then
+toggleFloorTwo = macro(500, "Floor 2", function() end)
+if toggleFloorTwo.isOn() then
   waypointsTable[2].func()
 end
 
-local c = macro(500, "Floor 3", function() end)
-if c.isOn() then
+toggleFloorThree = macro(500, "Floor 3", function() end)
+if toggleFloorThree.isOn() then
   waypointsTable[3].func()
 end
 
-local d = macro(500, "Magical Forest Dungeon", function() end)
-if d.isOn() then
+toggleMagicalForest = macro(500, "Magical Forest Dungeon", function() end)
+if toggleMagicalForest.isOn() then
   onPlayerPositionChange(function(newPos, oldPos)
     if newPos.z == 1 then
       storage.loadedWaypoints = waypointsTable["Magical Forest Dungeon"].floorOne
@@ -119,8 +119,8 @@ if d.isOn() then
   end)
 end
 
-local e = macro(500, "Desert Dungeon", function() end)
-if e.isOn() then
+toggleDesert = macro(500, "Desert Dungeon", function() end)
+if toggleDesert.isOn() then
   onPlayerPositionChange(function(newPos, oldPos)
     if newPos.z == 1 then
       storage.loadedWaypoints = waypointsTable["Desert Dungeon"].floorOne
@@ -152,8 +152,8 @@ if e.isOn() then
   end)
 end
 
-local f = macro(500, "Undead Dungeon", function() end)
-if f.isOn() then
+toggleUndead = macro(500, "Undead Dungeon", function() end)
+if toggleUndead.isOn() then
   onPlayerPositionChange(function(newPos, oldPos)
     if newPos.z == 1 then
       storage.loadedWaypoints = waypointsTable["Undead Dungeon"].floorOne
