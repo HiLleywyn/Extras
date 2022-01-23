@@ -454,15 +454,15 @@
   ​ [​"​Dungeon Token"​] ​=​ { 
  ​    itemID ​=​ ​0​, 
  ​    goldValue ​=​ ​0, 
- ​    evoluniaTokensValue =​ ​1,
-     dungeonTokensValue = 0,
+ ​    evoluniaTokensValue =​ ​0,
+     dungeonTokensValue = 1,
      eventTokensValue = 0
  ​  },
   ​ [​"​Great Dungeon Token"​] ​=​ { 
  ​    itemID ​=​ ​0​, 
  ​    goldValue ​=​ ​0, 
- ​    evoluniaTokensValue =​ ​100,
-     dungeonTokensValue = 0,
+ ​    evoluniaTokensValue =​ ​0,
+     dungeonTokensValue = 100,
      eventTokensValue = 0
  ​  },
   ​ [​"​Event Token"​] ​=​ { 
