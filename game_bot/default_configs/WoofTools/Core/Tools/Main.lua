@@ -83,7 +83,7 @@ UI.TextEdit(storage.ManatrainText or "Utevo Mana", function(widget, text)
   storage.ManatrainText = text
 end)
 
-local moneyIds = {3031, 3035, 3043, 16128, 16129} -- gold coin, platinium coin
+local moneyIds = {3031, 3035, 3043, 16128, 16129, 28716} -- gold coin, platinium coin
 macro(1000, "Auto-Exchange Money", function()
   local containers = g_game.getContainers()
   for index, container in pairs(containers) do
