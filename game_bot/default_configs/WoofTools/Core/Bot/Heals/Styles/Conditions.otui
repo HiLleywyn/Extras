@@ -1,0 +1,229 @@
+UturaComboBoxPopupMenu < ComboBoxPopupMenu
+UturaComboBoxPopupMenuButton < ComboBoxPopupMenuButton
+UturaComboBox < ComboBox
+  @onSetup: |
+    self:addOption("Utura")
+    self:addOption("Utura Gran")
+
+CureConditions < Panel
+  id: Cure
+  image-source: /images/ui/panel_flat
+  image-border: 6
+  padding: 3
+  size: 200 190
+
+  Label
+    id: label1
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 10
+    margin-left: 5
+    text: Poison
+    color: #ffaa00
+
+  CheckBox
+    id: CurePoison
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label2
+    anchors.left: label1.left
+    anchors.top: label1.bottom
+    margin-top: 10
+    text: Curse
+    color: #ffaa00
+
+
+  CheckBox
+    id: CureCurse
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label3
+    anchors.left: label2.left
+    anchors.top: label2.bottom
+    margin-top: 10
+    text: Bleed
+    color: #ffaa00
+
+  CheckBox
+    id: CureBleed
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label5
+    anchors.left: label3.left
+    anchors.top: label3.bottom
+    margin-top: 10
+    text: Electify
+    color: #ffaa00
+
+  CheckBox
+    id: CureElectrify
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label6
+    anchors.left: label5.left
+    anchors.top: label5.bottom
+    margin-top: 10
+    text: Paralyse
+    color: #ffaa00
+
+  CheckBox
+    id: CureParalyse
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label7
+    anchors.left: label6.left
+    anchors.top: label6.bottom
+    margin-top: 10
+    margin-left: 12
+    text: Spell:
+
+  TextEdit
+    id: ParalyseSpell
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.left: prev.right
+    margin-left: 5
+    width: 100
+
+HoldConditions < Panel
+  id: Hold
+  image-source: /images/ui/panel_flat
+  image-border: 6
+  padding: 3
+  size: 200 190
+
+  Label
+    id: label3
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 10
+    margin-left: 5
+    text: Utana Vid
+    color: #ffaa00
+
+  CheckBox
+    id: HoldUtana
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label4
+    anchors.left: label3.left
+    anchors.top: label3.bottom
+    margin-top: 10
+    text: Utamo Vita
+    color: #ffaa00
+
+  CheckBox
+    id: HoldUtamo
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label5
+    anchors.left: label4.left
+    anchors.top: label4.bottom
+    margin-top: 10
+    text: Recovery
+    color: #ffaa00
+
+  CheckBox
+    id: HoldUtura
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.right: parent.right
+    margin-right: 5
+
+  Label
+    id: label6
+    anchors.left: label5.left
+    anchors.top: label5.bottom
+    margin-top: 10
+    margin-left: 12
+    text: Spell:
+
+  UturaComboBox
+    id: UturaType
+    anchors.verticalCenter: prev.verticalCenter
+    anchors.left: prev.right
+    margin-left: 5
+    width: 100
+
+  CheckBox
+    id: IgnoreInPz
+    anchors.left: label5.left
+    anchors.top: label6.bottom
+    margin-top: 12
+
+  Label
+    anchors.verticalCenter: IgnoreInPz.verticalCenter
+    anchors.left: prev.right
+    margin-top: 3
+    margin-left: 5
+    text: Don't Cast in Protection Zones
+    font: cipsoftFont
+
+ConditionsWindow < MainWindow
+  !text: tr('Condition Manager')
+  size: 445 280
+  @onEscape: self:hide()
+
+  CureConditions
+    id: Cure
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 7
+
+  Label
+    id: label
+    anchors.top: parent.top
+    anchors.left: parent.left
+    text: Cure Conditions
+    color: #88e3dd
+    margin-left: 5
+
+  HoldConditions
+    id: Hold
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 7
+
+  Label
+    id: label
+    anchors.top: parent.top
+    anchors.right: parent.right
+    text: Hold Conditions
+    color: #88e3dd
+    margin-right: 50
+
+  HorizontalSeparator
+    id: separator
+    anchors.right: parent.right
+    anchors.left: parent.left
+    anchors.bottom: closeButton.top
+    margin-bottom: 8
+
+  Button
+    id: closeButton
+    !text: tr('Close')
+    font: cipsoftFont
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    size: 45 21
+    margin-top: 15
+    margin-right: 5
