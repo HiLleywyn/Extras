@@ -92,6 +92,18 @@ Libraries.Tiles.Landmarks = {
   ["Undead Dungeon Ten"] = { ["y"] = 1628, ["x"] = 2480, ["z"] = 10 },
   ["Undead Dungeon Eleven"] = { ["y"] = 1628, ["x"] = 2480, ["z"] = 11 },
   ["Undead Dungeon Twelve"] = { ["y"] = 1628, ["x"] = 2480, ["z"] = 12 },
+  ["Toxic Dungeon One"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 1 },
+  ["Toxic Dungeon Two"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 2 },
+  ["Toxic Dungeon Three"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 3 },
+  ["Toxic Dungeon Four"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 4 },
+  ["Toxic Dungeon Five"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 5 },
+  ["Toxic Dungeon Six"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 6 },
+  ["Toxic Dungeon Seven"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 7 },
+  ["Toxic Dungeon Eight"] ={ ["y"] = 1454, ["x"] = 2611, ["z"] = 8 },
+  ["Toxic Dungeon Nine"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 9 },
+  ["Toxic Dungeon Ten"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 10 },
+  ["Toxic Dungeon Eleven"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 11 },
+  ["Toxic Dungeon Twelve"] = { ["y"] = 1454, ["x"] = 2611, ["z"] = 12 },
 }
 --------------------------------------------------------------------------------
 -- Portal Tiles (Format: Y, X, Z)
