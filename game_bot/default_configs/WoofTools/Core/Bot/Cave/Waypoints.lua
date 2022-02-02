@@ -61,6 +61,20 @@ waypointsTable = {
     floorEleven = "/Configs/Cave/Dungeons/Undead/11",
     floorTwelve = "/Configs/Cave/Dungeons/Undead/12",
   },
+  ["Toxic Dungeon"] = {
+    floorOne = "/Configs/Cave/Dungeons/Toxic/1",
+    floorTwo = "/Configs/Cave/Dungeons/Toxic/2",
+    floorThree = "/Configs/Cave/Dungeons/Toxic/3",
+    floorFour = "/Configs/Cave/Dungeons/Toxic/4",
+    floorFive = "/Configs/Cave/Dungeons/Toxic/5",
+    floorSix = "/Configs/Cave/Dungeons/Toxic/6",
+    floorSeven = "/Configs/Cave/Dungeons/Toxic/7",
+    floorEight = "/Configs/Cave/Dungeons/Toxic/8",
+    floorNine = "/Configs/Cave/Dungeons/Toxic/9",
+    floorTen = "/Configs/Cave/Dungeons/Toxic/10",
+    floorEleven = "/Configs/Cave/Dungeons/Toxic/11",
+    floorTwelve = "/Configs/Cave/Dungeons/Toxic/12",
+  },
   ["Default"] = {
     folder = "/Configs/Cave",
     func = function() setWaypoints("Default") end
@@ -179,6 +193,39 @@ if toggleUndead.isOn() then
       storage.loadedWaypoints = waypointsTable["Undead Dungeon"].floorEleven
     elseif newPos.z == 12 then
       storage.loadedWaypoints = waypointsTable["Undead Dungeon"].floorTwelve
+    else
+      print("Invalid floor")
+    end
+  end)
+end
+
+toggleToxic = macro(500, "Toxic Dungeon", function() end)
+if toggleToxic.isOn() then
+  onPlayerPositionChange(function(newPos, oldPos)
+    if newPos.z == 1 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorOne
+    elseif newPos.z == 2 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorTwo
+    elseif newPos.z == 3 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorThree
+    elseif newPos.z == 4 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorFour
+    elseif newPos.z == 5 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorFive
+    elseif newPos.z == 6 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorSix
+    elseif newPos.z == 7 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorSeven
+    elseif newPos.z == 8 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorEight
+    elseif newPos.z == 9 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorNine
+    elseif newPos.z == 10 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorTen
+    elseif newPos.z == 11 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorEleven
+    elseif newPos.z == 12 then
+      storage.loadedWaypoints = waypointsTable["Toxic Dungeon"].floorTwelve
     else
       print("Invalid floor")
     end
