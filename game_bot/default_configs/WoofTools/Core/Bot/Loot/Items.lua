@@ -476,6 +476,17 @@ loot = {
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
       }
     }
+  },
+  -- 1400+ End
+  -- 1700+ Start
+  {
+    name = "1700+",
+    lists = {
+      {
+        name = "Dwarf Berserkers",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
+      }
+    }
   }
--- 1400+ End
+-- 1700+ End
 }
