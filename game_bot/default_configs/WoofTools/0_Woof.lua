@@ -33,7 +33,7 @@ setDefaultTab("Main")
 
 UI.Separator()
 UI.Separator()
-UI.Label("WoofTools v2.2.0")
+UI.Label("WoofTools v2.2.1")
 UI.Separator()
 UI.Separator()
 UI.Label("Support: Tether @ Evolunia")
