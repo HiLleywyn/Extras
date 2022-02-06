@@ -115,16 +115,16 @@ UI.TextEdit(storage.aM or "I'm an advertisement.", function(widget, text)
 end)
 -- Toggles where to send the Advertise message.
 UI.Label("Channels")
-aT = macro(60000, "Advertising", function() end) -- Advertising toggle.
-wcT = macro(60000, "World Chat", function() end) -- World Chat toggle.
-pT = macro(60000, "Polish", function() end) -- Polish toggle.
-sT = macro(60000, "Say", function() end) -- Say toggle.
-yT = macro(60000, "Yell", function() end) -- Yell toggle.
+aT = macro(120000, "Advertising", function() end) -- Advertising toggle.
+wcT = macro(120000, "World Chat", function() end) -- World Chat toggle.
+pT = macro(120000, "Polish", function() end) -- Polish toggle.
+sT = macro(120000, "Say", function() end) -- Say toggle.
+yT = macro(120000, "Yell", function() end) -- Yell toggle.
 UI.Separator()
 -- End Auto-Advertise setup
 
 -- Main Auto-Advertise Macro
-macro(60000, "Auto-Advertise", function()
+macro(120000, "Auto-Advertise", function()
   local aC = getChannelId("Advertising") -- Advertising channel
   local wcC = getChannelId("World Chat") -- World Chat channel
   local pC = getChannelId("Polish") -- Polish channel
