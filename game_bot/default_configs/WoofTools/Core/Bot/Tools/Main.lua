@@ -118,6 +118,8 @@ UI.Label("Channels")
 aT = macro(60000, "Advertising", function() end) -- Advertising toggle.
 wcT = macro(60000, "World Chat", function() end) -- World Chat toggle.
 pT = macro(60000, "Polish", function() end) -- Polish toggle.
+sT = macro(60000, "Say", function() end) -- Say toggle.
+yT = macro(60000, "Yell", function() end) -- Yell toggle.
 UI.Separator()
 -- End Auto-Advertise setup
 
@@ -157,6 +159,16 @@ macro(60000, "Auto-Advertise", function()
       else -- Polish channel "pT" does not exist or is unavailable.
         error("[Auto-Advertising]: Polish channel is not available.")
       end
+    end
+    -- If Say toggle "sT" is on.
+    if sT.isOn() then
+      -- Say Advertise message "aM".
+      say(storage.aM)
+    end
+    -- If Yell toggle "yT" is on.
+    if yT.isOn() then
+      -- Yell Advertise message "aM".
+      yell(storage.aM)
     end
   else -- Advertisement message "aM" is blank.
     error("[Auto-Advertising]: Advertisement message must not be blank.")
