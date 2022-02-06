@@ -43,7 +43,7 @@ foodContainer:setItems(storage.foodItems)
 UI.Separator()
 
 local wsadWalking = modules.game_walking.wsadWalking
-local doorsIds = { 8265, 1629, 1632, 5129 }
+local doorsIds = { 8265, 1629, 1632, 5129, 7727 }
 
 function checkForDoors(pos)
   local tile = g_map.getTile(pos)

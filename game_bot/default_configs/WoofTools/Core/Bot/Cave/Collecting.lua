@@ -57,7 +57,7 @@ function changeWalk(val)
     CaveBot.setOn(val)
   end
 end
-UI.Separator()
+
 UI.Label("Collect Essences & Boxes - Open Invasion Portals")
 local collecting = macro(500, "Collecting", function()
   for i, tile in ipairs(g_map.getTiles(posz())) do
@@ -121,3 +121,4 @@ local collecting = macro(500, "Collecting", function()
     end
   end
 end)
+UI.Separator()
