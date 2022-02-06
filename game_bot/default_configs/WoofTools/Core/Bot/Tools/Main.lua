@@ -42,6 +42,7 @@ foodContainer:setItems(storage.foodItems)
 
 UI.Separator()
 
+local candyItem = 6569
 macro((30 * 60000), "Auto-Eat Candies", function()
   for _, container in pairs(g_game.getContainers()) do
     for __, item in ipairs(container:getItems()) do
@@ -56,10 +57,11 @@ end)
 
 UI.Separator()
 
+local xpPotionItem = 11372
 macro((60 * 60000), "Auto-Use XP Potions", function()
   for _, container in pairs(g_game.getContainers()) do
     for __, item in ipairs(container:getItems()) do
-      for i, foodItem in ipairs(candyItem) do
+      for i, foodItem in ipairs(xpPotionItem) do
         if item:getId() == 11372 then
           return g_game.use(item)
         end
