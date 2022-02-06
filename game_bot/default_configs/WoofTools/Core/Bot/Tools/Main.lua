@@ -102,28 +102,80 @@ macro(1000, "Auto-Exchange Money", function()
 end)
 
 UI.Separator()
-
-macro(60000, "Trade Message", function()
-  local trade = getChannelId("advertising")
-  if not trade then
-    trade = getChannelId("trade")
-  end
-  if trade and storage.autoTradeMessage:len() > 0 then
-    sayChannel(trade, storage.autoTradeMessage)
-  end
-end)
-UI.TextEdit(storage.autoTradeMessage or "Evolunia is awesome!", function(widget, text)
-  storage.autoTradeMessage = text
-end)
-
+--------------------------------------------------------------------------------
+-- Auto-Advertise
+--------------------------------------------------------------------------------
+-- Auto-Advertise setup
+UI.Label("Auto-Advertise Setup")
 UI.Separator()
+-- Advertise message "aM" to send.
+UI.Label("Message")
+UI.TextEdit(storage.aM or "I'm an advertisement.", function(widget, text)
+  storage.aM = text
+end)
+-- Toggles where to send the Advertise message.
+UI.Label("Channels")
+aT = macro(60000, "Advertising", function() end) -- Advertising toggle.
+wcT = macro(60000, "World Chat", function() end) -- World Chat toggle.
+pT = macro(60000, "Polish", function() end) -- Polish toggle.
+UI.Separator()
+-- End Auto-Advertise setup
 
-macro(1000, "Auto-Fish", function()
-  for _, tile in ipairs(g_map.getTiles(posz())) do
-    if table.contains({4596, 4597, 4598, 4599, 4600, 4601, 4602, 4603}, tile:getTopUseThing():getId()) and getDistanceBetween(pos(), tile:getPosition()) <= 7 then
-      useWith(3483, tile:getTopUseThing())
+-- Main Auto-Advertise Macro
+macro(60000, "Auto-Advertise", function()
+  local aC = getChannelId("Advertising") -- Advertising channel
+  local wcC = getChannelId("World Chat") -- World Chat channel
+  local pC = getChannelId("Polish") -- Polish channel
+  -- If Advertisement message "aM" is not blank.
+  if storage.aM:len() > 0 then
+    -- If Advertising channel toggle "aT" is on.
+    if aT.isOn() then
+      --If Advertising channel "aC" exists.
+      if aC then
+        -- Send Advertise message "aM" to Advertising channel "aC".
+        sayChannel(aC, storage.aM)
+      else -- Advertising channel "aC" does not exist or is unavailable.
+        error("[Auto-Advertising]: Advertising channel is not available.")
+      end
     end
+    -- If World Chat channel toggle "wcT" is on.
+    if wcT.isOn() then
+      -- If World Chat channel "wcC" exists.
+      if wcC then
+        -- Send Advertise message "aM" to World Chat channel "wcC".
+        sayChannel(wcC, storage.aM)
+      else -- World Chat channel "wcC" does not exist or is unavailable.
+        error("Auto-Advertising]: World Chat channel is not available.")
+      end
+    end
+    -- If Polish channel toggle "pT" is on.
+    if pT.isOn() then
+      -- If Polish channel "pT" exists.
+      if pC then
+        -- Send Advertise message "aM" to Polish channel "pC".
+        sayChannel(pC, storage.aM)
+      else -- Polish channel "pT" does not exist or is unavailable.
+        error("[Auto-Advertising]: Polish channel is not available.")
+      end
+    end
+  else -- Advertisement message "aM" is blank.
+    error("[Auto-Advertising]: Advertisement message must not be blank.")
   end
+  -- End Main Auto-Advertise Macro
 end)
 
 UI.Separator()
+-- End Auto-Advertise
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- -- Auto-Fish
+-- macro(1000, "Auto-Fish", function()
+--   for _, tile in ipairs(g_map.getTiles(posz())) do
+--     if table.contains({4596, 4597, 4598, 4599, 4600, 4601, 4602, 4603}, tile:getTopUseThing():getId()) and getDistanceBetween(pos(), tile:getPosition()) <= 7 then
+--       useWith(3483, tile:getTopUseThing())
+--     end
+--   end
+-- end)
+-- UI.Separator()
+-- -- End Auto-Fish
+--------------------------------------------------------------------------------
