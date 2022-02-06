@@ -71,7 +71,7 @@ TargetBot.Creature.walk = function(creature, config, targets)
         local monsters = 0
         if targets < config.lureCount then
             if config.lureCavebot then
-                return TargetBot.allowCaveBot(200)
+                return TargetBot.allowCaveBot(300)
             else
                 local path = findPath(pos, cpos, 5, {ignoreNonPathable = true, precision = 2})
                 if path then
