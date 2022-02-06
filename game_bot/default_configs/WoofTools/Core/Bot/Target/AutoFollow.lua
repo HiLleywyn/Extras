@@ -14,7 +14,7 @@ end
 
 function getTilesBetween(currentPosition, targetPosition)
 	local tiles = {}
-	local directions, result = findPath(currentPosition, targetPosition, getDistanceBetween(currentPosition, targetPosition), {ignoreNonPathable=false, ignoreNonWalkable=true, precision=1})
+	local directions, result = findPath(currentPosition, targetPosition, getDistanceBetween(currentPosition, targetPosition), {ignoreNonPathable=true, ignoreNonWalkable=true, precision=1})
 
 	if not directions then
 		return tiles
@@ -114,7 +114,7 @@ local doorsIds = { 8265, 7727, 5111, 8261, 8259, 5113, 1646 }
 local followTimeOut = (now + 1500)
 local isFollowing = false
 
-mcrAutoFollow = macro(100, "Auto-Follow", function()
+mcrAutoFollow = macro(20, "Auto-Follow", function()
 	local followAction = FollowActions.Walk
 	local useThing = nil
 	local toUseWithItems = nil

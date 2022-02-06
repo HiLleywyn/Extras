@@ -7,7 +7,7 @@ macro(500, "Auto-Cast Haste", nil, function()
     end
   end
 end)
-UI.TextEdit(storage.autoHasteText or "utani hur", function(widget, text)
+UI.TextEdit(storage.autoHasteText or "Utani Hur", function(widget, text)
   storage.autoHasteText = text
 end)
 
@@ -54,7 +54,7 @@ function checkForDoors(pos)
     end
   end
 end
-local autoOpenDoors = macro(500, "Auto-Open Doors", function() end)
+local autoOpenDoors = macro(200, "Auto-Open Doors", function() end)
 
 if autoOpenDoors.isOn() then
   onKeyPress(function(keys)
@@ -83,7 +83,7 @@ UI.TextEdit(storage.ManatrainText or "Utevo Mana", function(widget, text)
   storage.ManatrainText = text
 end)
 
-local moneyIds = {3031, 3035, 3043, 16128, 16129, 28716} -- gold coin, platinium coin
+local moneyIds = {3031, 3035, 3043, 16128, 16129, 28716}
 macro(1000, "Auto-Exchange Money", function()
   local containers = g_game.getContainers()
   for index, container in pairs(containers) do

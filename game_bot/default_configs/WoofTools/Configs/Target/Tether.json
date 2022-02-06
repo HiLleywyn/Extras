@@ -10,7 +10,7 @@
       "avoidAttacks": false,
       "lure": false,
       "name": "*",
-      "maxDistance": 8,
+      "maxDistance": 10,
       "chase": false,
       "priority": 1,
       "regex": "^.*$"
