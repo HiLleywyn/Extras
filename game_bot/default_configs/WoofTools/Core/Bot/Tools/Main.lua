@@ -42,6 +42,20 @@ foodContainer:setItems(storage.foodItems)
 
 UI.Separator()
 
+macro((30 * 60000), "Auto-Eat Candies", function()
+  for _, container in pairs(g_game.getContainers()) do
+    for __, item in ipairs(container:getItems()) do
+      for i, foodItem in ipairs(candyItem) do
+        if item:getId() == 6569 then
+          return g_game.use(item)
+        end
+      end
+    end
+  end
+end)
+
+UI.Separator()
+
 local wsadWalking = modules.game_walking.wsadWalking
 local doorsIds = { 8265, 1629, 1632, 5129, 7727 }
 
