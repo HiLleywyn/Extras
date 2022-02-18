@@ -1,5 +1,4 @@
 protected_loot = {
-  -- Misc. Start
   {
     name = "Misc. Items",
     lists = {
@@ -16,7 +15,6 @@ protected_loot = {
 }
 
 loot = {
-  -- 0+ Start
   {
     name = "0+",
     lists = {
@@ -86,8 +84,6 @@ loot = {
       }
     }
   },
-  -- 0+ End
-  -- 80+ Start
   {
     name = "80+",
     lists = {
@@ -153,8 +149,6 @@ loot = {
       }
     }
   },
-  -- 80+ End
-  -- 200+ Start
   {
     name = "200+",
     lists = {
@@ -200,8 +194,6 @@ loot = {
       }
     }
   },
-  -- 200+ End
-  -- 350+ Start
   {
     name = "350+",
     lists = {
@@ -243,8 +235,6 @@ loot = {
       }
     }
   },
-  -- 350+ End
-  -- 500+ Start
   {
     name = "500+",
     lists = {
@@ -282,8 +272,6 @@ loot = {
       }
     }
   },
-  -- 500+ End
-  -- 650+ Start
   {
     name = "650+",
     lists = {
@@ -325,8 +313,6 @@ loot = {
       }
     }
   },
-  -- 650+ End
-  -- 750+ Start
   {
     name = "750+",
     lists = {
@@ -360,133 +346,58 @@ loot = {
       }
     }
   },
-  -- 750+ End
-  --900+ Start
   {
-    name = "900+",
+    name = "900-1100",
     lists = {
       {
-        name = "Cultists",
-        loot = {"platinum coin","demonbone","guardian boots","drakinata","thaian sword","calopteryx cape"}
-      },
-      {
-        name = "Shadow Mages",
-        loot = {"platinum coin","demonbone","guardian boots","drakinata","thaian sword","calopteryx cape"}
-      },
-      {
-        name = "Black Hydras",
-        loot = {"platinum coin","demonbone","guardian boots","drakinata","thaian sword","calopteryx cape"}
-      },
-      {
-        name = "Furious Orcs",
-        loot = {"platinum coin","demonbone","guardian boots","drakinata","thaian sword","calopteryx cape"}
-      },
-      {
-        name = "Icy Vortexes",
-        loot = {"platinum coin","demonbone","guardian boots","drakinata","thaian sword","calopteryx cape"}
-      },
-      {
-        name = "Silver Dragons",
+        name = "900-1100 Loot Table",
         loot = {"platinum coin","demonbone","guardian boots","drakinata","thaian sword","calopteryx cape"}
       }
     }
   },
-  -- 900+ End
-  -- 1100+ Start
   {
-    name = "1100+",
+    name = "1100-1400",
     lists = {
       {
-        name = "Cursed Ogres",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Arctic Mages",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Royal Elves",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","wild roses (ammo slot)"}
-      },
-      {
-        name = "Hellfire Warriors",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor", "hellfire key","hellfire boots"}
-      },
-      {
-        name = "Toxic Medusas (WIP)",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Golden Champions",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","bar of gold"}
-      },
-      {
-        name = "Ancient Mummies",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Demonic Spiders",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Arctic Giants",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Elite Hellflayers",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Great Tarantulas",
-        loot = {"platinum coin","onyx flail","wand of voodoo","zaoan legs","zaoan armor","zaoan helmet","draken boots","zaoan sword"}
+        name = "1100-1400 Loot Table",
+        loot = {"platinum coin","wild roses (ammo slot)","bar of gold","hellfire key","hellfire boots","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","onyx flail","wand of voodoo","zaoan legs","zaoan armor","zaoan helmet","draken boots","zaoan sword"}
       }
     }
   },
-  -- 1100+ End
-  -- 1400+ Start
   {
-    name = "1400+",
+    name = "1400-1700",
     lists = {
       {
-        name = "Elite Carniphilas",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Necrotic Demons",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Cursed Wereboars",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Combat Assassins",
+        name = "1400-1700 Loot Table",
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","transmission rune"}
-      },
+      }
+    }
+  },
+  {
+    name = "1700-1900",
+    lists = {
       {
-        name = "Toxic Widows",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
-      },
-      {
-        name = "Frozen Heroes",
-        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor","transmission rune"}
-      },
-      {
-        name = "Venomous Hydras",
+        name = "1700-1900 Loot Table",
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
       }
     }
   },
-  -- 1400+ End
-  -- 1700+ Start
   {
-    name = "1700+",
+    name = "1900-2000",
     lists = {
       {
-        name = "Dwarf Berserkers",
+        name = "1900-2000 Loot Table",
+        loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
+      }
+    }
+  },
+  {
+    name = "2100+",
+    lists = {
+      {
+        name = "2100+ Loot Table",
         loot = {"platinum coin","steel boots","guardian boots","golden legs","boots of haste","magic plate armor"}
       }
     }
   }
--- 1700+ End
 }
