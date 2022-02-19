@@ -11,7 +11,7 @@ MessageSettings = {
   statusSmall     = { color = TextColors.white,                           screenTarget='statusLabel' },
   private         = { color = TextColors.lightblue,                       screenTarget='privateLabel' },
   lootGreen     = { color = TextColors.green,  consoleTab='Loot'},
-  textGreen     = { color = TextColors.green,  consoleTab='Green Text',   consoleOption='showInfoMessagesInConsole' }
+  textGreen     = { color = TextColors.green,  consoleTab='Green Text', screenTarget='highCenterLabel', consoleOption='showInfoMessagesInConsole' }
 }
 
 MessageTypes = {
