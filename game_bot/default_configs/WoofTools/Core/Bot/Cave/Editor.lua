@@ -139,6 +139,13 @@ CaveBot.Editor.setup = function()
     examples=CaveBot.Editor.Dungeons,
     width=650
   })
+  registerAction("player", {
+    title="Edit player function",
+    multiline=true,
+    value=CaveBot.Editor.Player[1][2],
+    examples=CaveBot.Editor.Player,
+    width=650
+  })
 
   ui.autoRecording.onClick = function()
     if ui.autoRecording:isOn() then

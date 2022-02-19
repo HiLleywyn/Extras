@@ -29,7 +29,8 @@ CaveBot.Core = {
 -- Functions - /Core/Bot/Cave/Functions/
 CaveBot.Functions = {
   "Example",
-  "Dungeons"
+  "Dungeons",
+  "Player"
 }
 --------------------------------------------------------------------------------
 -- Extensions - /Core/Bot/Cave/Extensions/
